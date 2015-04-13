@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sprite_type>
+    <image_config>SEPARATED</image_config>
+    <width>64</width>
+    <height>64</height>
+    <images_list>
+		<image_file id="1"  file_name="grunt_small_IDLE_1.png"/>
+		<image_file id="2"  file_name="grunt_small_IDLE_2.png"/>
+		<image_file id="3"  file_name="grunt_small_IDLE_3.png"/>
+		<image_file id="4"  file_name="grunt_small_IDLE_4.png"/>
+		<image_file id="5"  file_name="grunt_small_IDLE_5.png"/>
+		<image_file id="6"  file_name="grunt_small_IDLE_6.png"/>
+		<image_file id="7"  file_name="grunt_small_IDLE_7.png"/>
+		<image_file id="8"  file_name="grunt_small_IDLE_8.png"/>
+		<image_file id="9"  file_name="grunt_small_IDLE_9.png"/>
+		<image_file id="10" file_name="grunt_small_IDLE_10.png"/>
+		<image_file id="11" file_name="grunt_small_IDLE_11.png"/>
+		<image_file id="12" file_name="grunt_small_IDLE_12.png"/>
+        <image_file id="13" file_name="grunt_small_DEAD_1.png"/>
+        <image_file id="14" file_name="grunt_small_DEAD_2.png"/>
+        <image_file id="15" file_name="grunt_small_DEAD_3.png"/>
+        <image_file id="16" file_name="grunt_small_DEAD_4.png"/>
+        <image_file id="17" file_name="grunt_small_DEAD_5.png"/>
+        <image_file id="18" file_name="grunt_small_DEAD_6.png"/>
+        <image_file id="19" file_name="grunt_small_DEAD_7.png"/>
+        <image_file id="20" file_name="grunt_small_DEAD_8.png"/>
+        <image_file id="21" file_name="grunt_small_DEAD_9.png"/>
+        <image_file id="22" file_name="grunt_small_DEAD_10.png"/>
+        <image_file id="23" file_name="grunt_small_DEAD_11.png"/>
+        <image_file id="24" file_name="grunt_small_DEAD_12.png"/>
+        <image_file id="25" file_name="grunt_small_DEAD_13.png"/>
+        <image_file id="26" file_name="grunt_small_DEAD_14.png"/>
+        <image_file id="27" file_name="grunt_small_DEAD_15.png"/>
+        <image_file id="28" file_name="grunt_small_DEAD_16.png"/>
+    </images_list>
+    <animations_list>
+        <animation_state>
+            <state>IDLE</state>
+            <animation_sequence>
+                <pose image_id="1" duration="2"/>
+                <pose image_id="2" duration="2"/>
+                <pose image_id="3" duration="2"/>
+                <pose image_id="4" duration="2"/>
+                <pose image_id="5" duration="2"/>
+                <pose image_id="6" duration="2"/>
+                <pose image_id="7" duration="2"/>
+                <pose image_id="8" duration="2"/>
+                <pose image_id="9" duration="2"/>
+                <pose image_id="10" duration="2"/>
+                <pose image_id="11" duration="2"/>
+                <pose image_id="12" duration="2"/>
+            </animation_sequence>
+        </animation_state>
+        <animation_state>
+            <state>DEAD</state>
+            <animation_sequence>
+                <pose image_id="13" duration="2"/>
+                <pose image_id="14" duration="2"/>
+                <pose image_id="15" duration="2"/>
+                <pose image_id="16" duration="2"/>
+                <pose image_id="17" duration="2"/>
+                <pose image_id="18" duration="2"/>
+                <pose image_id="19" duration="2"/>
+                <pose image_id="20" duration="2"/>
+                <pose image_id="21" duration="2"/>
+                <pose image_id="22" duration="2"/>
+                <pose image_id="23" duration="2"/>
+                <pose image_id="24" duration="2"/>
+                <pose image_id="25" duration="2"/>
+                <pose image_id="26" duration="2"/>
+                <pose image_id="27" duration="2"/>
+                <pose image_id="28" duration="60"/>
+            </animation_sequence>
+        </animation_state>
+    </animations_list>  
+</sprite_type>

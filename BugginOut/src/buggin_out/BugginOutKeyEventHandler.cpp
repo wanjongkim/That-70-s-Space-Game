@@ -65,22 +65,28 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			if (input->isKeyDown(A_KEY) && pp->getX() >= 0)
 			{
 				vX = -PLAYER_SPEED;
-				player->setCurrentState(MOVE_LEFT);
+				if (input->isKeyDown(S_KEY)) player->setCurrentState(MOVE_DOWN_LEFT);
+				else if (input->isKeyDown(W_KEY)) player->setCurrentState(MOVE_UP_LEFT);
+				else player->setCurrentState(MOVE_LEFT);
 			}
 			if (input->isKeyDown(D_KEY) && pp->getX() <= 3200)
 			{
 				vX = PLAYER_SPEED;
-				player->setCurrentState(MOVE_RIGHT);
+				if (input->isKeyDown(S_KEY)) player->setCurrentState(MOVE_DOWN_RIGHT);
+				else if (input->isKeyDown(W_KEY)) player->setCurrentState(MOVE_UP_RIGHT);
+				else  player->setCurrentState(MOVE_RIGHT);
 			}
 			if (input->isKeyDown(S_KEY) && pp->getY() <= 1920)
 			{
 				vY = PLAYER_SPEED;
-				player->setCurrentState(MOVE_DOWN);
+				if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY))
+					player->setCurrentState(MOVE_DOWN);
 			}
 			if (input->isKeyDown(W_KEY) && pp->getY() >= 0)
 			{
 				vY = -PLAYER_SPEED;
-				player->setCurrentState(MOVE_UP);
+				if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY))
+					player->setCurrentState(MOVE_UP);
 			}
 			if (input->isKeyDownForFirstTime(G_KEY))
 			{

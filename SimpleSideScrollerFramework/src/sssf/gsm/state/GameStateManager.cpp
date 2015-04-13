@@ -25,6 +25,8 @@
 GameStateManager::GameStateManager()	
 {
 	spriteManager = new SpriteManager();
+	b2Vec2* vec = new b2Vec2(0.0, 0.0);
+	bWorld = new b2World(*vec);
 	currentGameState = GS_SPLASH_SCREEN;
 	currentLevel = NO_LEVEL_LOADED;
 }
@@ -36,6 +38,7 @@ GameStateManager::GameStateManager()
 GameStateManager::~GameStateManager()	
 {
 	delete spriteManager;
+	delete bWorld;
 }
 
 /*

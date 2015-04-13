@@ -25,6 +25,7 @@
 #include "sssf\gsm\sprite\SpriteManager.h"
 #include "sssf\gsm\world\World.h"
 #include "sssf\gsm\world\WorldLayer.h"
+#include "Box2D\Dynamics\b2World.h"
 
 class Game;
 
@@ -53,6 +54,7 @@ private:
 	// FOR MANAGING STATIC GAME WORLD DATA, i.e. BACKGROUND IMAGES,
 	// TILES, PLATFORMS, etc. BASICALLY THINGS THAT ARE NOT ANIMATED
 	// AND DO NOT MOVE
+	b2World* bWorld;
 	World world;
 
 	// FOR MANAGING DYNAMIC GAME OBJECTS FOR CURRENT LEVEL
