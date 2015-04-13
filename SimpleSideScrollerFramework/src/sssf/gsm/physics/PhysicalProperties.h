@@ -7,6 +7,8 @@ protected:
 	float buoyancy;
 	float mass;
 	bool  collidable;
+	bool  fireStraight;
+	bool  dead;
 	float coefficientOfRestitution;
 	float x;
 	float y;
@@ -15,9 +17,12 @@ protected:
 	float velocityY;
 	float accelerationX;
 	float accelerationY;
+	int spriteType;
+	int deathCount;
+	int shotTimer;
 
 public:
-	PhysicalProperties()	{accelerationX = 0; accelerationY = 0;}
+	PhysicalProperties()	{ accelerationX = 0; accelerationY = 0; fireStraight = true; dead = false; deathCount = 0; shotTimer = 0; }
 	~PhysicalProperties()	{}
 
 	// INLINED METHODS
@@ -32,6 +37,16 @@ public:
 	float getVelocityY()					{ return velocityY;				}
 	float getAccelerationX()				{ return accelerationX;			}
 	float getAccelerationY()				{ return accelerationY;			}
+	bool getFireDir()						{ return fireStraight;			}
+	bool getDead()							{ return dead;					}
+	int  getShot()							{ return shotTimer;				}
+	void setShot(int initShot)				{ shotTimer = initShot;			}
+	int  getSpriteType()					{ return spriteType;			}
+	void setSpriteType(int initSpriteType)	{ spriteType = initSpriteType;  }
+	int  getDeathCount()					{ return deathCount;			}
+	void setDeathCount(int initDeath)	    { deathCount = initDeath;		}
+	void swapFireDir()						{ fireStraight = !fireStraight; }
+	void setDead()							{ dead = true; 				    }
 	void setBuoyancy(float initBuoyancy)	{ buoyancy = initBuoyancy;		}
 	void setMass(float initMass)			{ mass = initMass;				}
 	void setCofficientOfRestitution(float cR) { coefficientOfRestitution = cR; }

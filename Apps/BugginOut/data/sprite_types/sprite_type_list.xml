@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite_type_list>
-  <sprite_type>blue_round_man</sprite_type>
-  <sprite_type>green_round_man</sprite_type>
-  <sprite_type>red_box_man</sprite_type>
-  <sprite_type>yellow_box_man</sprite_type>
+  <sprite_type>temp_ship</sprite_type>
+  <sprite_type>grunt_small</sprite_type>
+  <sprite_type>small_rock_1</sprite_type>
+  <sprite_type>small_rock_2</sprite_type>
+  <sprite_type>bullet_good</sprite_type>
+  <sprite_type>bullet_bad</sprite_type>
 </sprite_type_list>

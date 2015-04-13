@@ -23,7 +23,7 @@ protected:
 
 public:
 	CollidableObject()	{}
-	~CollidableObject()	{}
+	virtual ~CollidableObject()	{}
 
 	// CollidableObject.cpp METHODS
 	void updateSweptShape(float percentageOfFrameTimeRemaining);

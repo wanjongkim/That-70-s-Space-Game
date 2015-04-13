@@ -8,9 +8,10 @@ class Bot : public AnimatedSprite
 {
 public:
 	Bot()	{}
-	~Bot()	{}
+	virtual ~Bot()	{}
 
 	// TO BE DEFINED BY BOT AI CLASSES
 	virtual void think(Game *game)=0;
+	virtual void setTexSize(int initx, int inity)=0;
 	virtual Bot* clone()=0;
 };

@@ -149,6 +149,9 @@ Bot* SpriteManager::removeBot(Bot *botToRemove)
 */
 void SpriteManager::update(Game *game)
 {
+	static const wstring DEAD = (L"DEAD");
+	static const wstring IDLE = (L"IDLE");
+
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 
@@ -158,8 +161,28 @@ void SpriteManager::update(Game *game)
 	while (botIterator != bots.end())
 	{
 		Bot *bot = (*botIterator);
-		bot->think(game);
-		bot->updateSprite();
-		botIterator++;
+		if (bot->getCurrentState() == DEAD){
+			bot->getPhysicalProperties()->setVelocity(0, bot->getPhysicalProperties()->getVelocityY());
+			if (bot->getPhysicalProperties()->getSpriteType() == 4){
+				bot->setCurrentlyCollidable(false);
+				botIterator = bots.erase(botIterator);
+				//delete(bot);
+			}
+			else if (bot->getPhysicalProperties()->getDeathCount() == 30){
+				bot->setCurrentlyCollidable(false);
+				botIterator = bots.erase(botIterator);
+				//delete(bot);
+			}
+			else{
+				bot->getPhysicalProperties()->setDeathCount(bot->getPhysicalProperties()->getDeathCount() + 1);
+				bot->updateSprite();
+				botIterator++;
+			}
+		}
+		else{
+			bot->think(game);
+			bot->updateSprite();
+			botIterator++;
+		}
 	}
 }

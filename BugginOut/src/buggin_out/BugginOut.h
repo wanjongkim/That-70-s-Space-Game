@@ -63,7 +63,7 @@ static const wstring	JUMPING = L"JUMPING";
 
 // FOR THE GAME WORLD
 static const float		MAX_VIEWPORT_AXIS_VELOCITY = 20.0f;
-static const float		W_GRAVITY = 0.8f;
+static const float		W_GRAVITY = 0.0f;
 static const float		JUMPING_BOT_MIN_CYCLES = 30;
 static const float		JUMPING_BOT_MAX_CYCLES = 120;
 static const float		JUMPING_BOT_MAX_VELOCITY = 40;
@@ -71,12 +71,23 @@ static const float		PLAYER_INIT_X = 80.0f;
 static const float		PLAYER_INIT_Y = 100.0f;
 static const float		JUMP_SPEED = -24.0f;
 static const float		PLAYER_SPEED = 6.0f;
+static const float		PLAYER_BULLET_SPEED = 12.0f;
+static const float		BOT_BULLET_SPEED = 10.0f;
 static const int		MIN_FPS = 5;
 static const int		MAX_FPS = 100;
 static const int		FPS_INC = 1;
 static const wstring	ATTACKING_RIGHT(L"ATTACKING_RIGHT");
 static const wstring	ATTACKING_LEFT(L"ATTACKING_LEFT");
+static const wstring	MOVE_RIGHT(L"MOVE_RIGHT");
+static const wstring	MOVE_LEFT(L"MOVE_LEFT");
+static const wstring	MOVE_UP(L"MOVE_UP");
+static const wstring	MOVE_DOWN(L"MOVE_DOWN");
+static const wstring	MOVE_UP_RIGHT(L"MOVE_UP_RIGHT");
+static const wstring	MOVE_UP_LEFT(L"MOVE_UP_LEFT");
+static const wstring	MOVE_DOWN_RIGHT(L"MOVE_DOWN_RIGHT");
+static const wstring	MOVE_DOWN_LEFT(L"MOVE_DOWN_LEFT");
 static const wstring	IDLE(L"IDLE");
+static const wstring	DEAD(L"DEAD");
 
 // USED FOR MOVEMENT
 const unsigned int W_KEY = (unsigned int)'W';
@@ -86,6 +97,11 @@ const unsigned int D_KEY = (unsigned int)'D';
 const unsigned int G_KEY = (unsigned int)'G';
 const unsigned int P_KEY = (unsigned int)'P';
 const unsigned int T_KEY = (unsigned int)'T';
+const unsigned int R_KEY = (unsigned int)'R';
+const unsigned int I_KEY = (unsigned int)'I';
+const unsigned int J_KEY = (unsigned int)'J';
+const unsigned int K_KEY = (unsigned int)'K';
+const unsigned int L_KEY = (unsigned int)'L';
 const unsigned int UP_KEY = VK_UP;
 const unsigned int DOWN_KEY = VK_DOWN;
 const unsigned int LEFT_KEY = VK_LEFT;

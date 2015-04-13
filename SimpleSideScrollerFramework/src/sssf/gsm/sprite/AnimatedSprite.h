@@ -54,7 +54,7 @@ public:
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
 	AnimatedSprite();
-	~AnimatedSprite();
+	virtual ~AnimatedSprite();
 	void changeFrame();
 	unsigned int getCurrentImageID();
 	void setCurrentState(wstring newState);

@@ -24,7 +24,7 @@ public:
 						unsigned int initMin, 
 						unsigned int initMax, 
 						unsigned int initMaxVelocity);
-	~RandomFloatingBot();
+	virtual ~RandomFloatingBot(){}
 	Bot*	clone();
 	void initBot(	unsigned int initMin,
 					unsigned int initMax,
@@ -32,6 +32,7 @@ public:
 	void	pickRandomCyclesInRange();
 	void	pickRandomVelocity(Physics *physics);
 	void	think(Game *game);
+	void	setTexSize(int initx, int inity){ this->getSpriteType()->setTextureSize(8, 8); }
 
 	// INLINED METHODS
 	unsigned int getCyclesRemainingBeforeThinking()	{ return cyclesRemainingBeforeThinking; }

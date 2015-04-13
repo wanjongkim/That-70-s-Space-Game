@@ -21,6 +21,7 @@
     <ClCompile Include="src\sssf\graphics\RenderList.cpp" />
     <ClCompile Include="src\sssf\graphics\TextureManager.cpp" />
     <ClCompile Include="src\sssf\gsm\ai\BotRecycler.cpp" />
+    <ClCompile Include="src\sssf\gsm\ai\bots\BasicBulletBot.cpp" />
     <ClCompile Include="src\sssf\gsm\ai\bots\RandomFloatingBot.cpp" />
     <ClCompile Include="src\sssf\gsm\ai\bots\RandomJumpingBot.cpp" />
     <ClCompile Include="src\sssf\gsm\physics\AABB.cpp" />
@@ -50,6 +51,7 @@
     <ClCompile Include="src\sssf_VS\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\sssf\data_loader\GameDataLoader.h" />
     <ClInclude Include="src\sssf\game\Game.h" />
     <ClInclude Include="src\sssf\game\IllegalArgumentException.h" />
@@ -60,6 +62,7 @@
     <ClInclude Include="src\sssf\graphics\TextureManager.h" />
     <ClInclude Include="src\sssf\gsm\ai\Bot.h" />
     <ClInclude Include="src\sssf\gsm\ai\BotRecycler.h" />
+    <ClInclude Include="src\sssf\gsm\ai\bots\BasicBulletBot.h" />
     <ClInclude Include="src\sssf\gsm\ai\bots\RandomFloatingBot.h" />
     <ClInclude Include="src\sssf\gsm\ai\bots\RandomJumpingBot.h" />
     <ClInclude Include="src\sssf\gsm\physics\AABB.h" />
@@ -101,6 +104,9 @@
     <ClInclude Include="src\sssf_VS\stdafx.h" />
     <ClInclude Include="src\sssf_VS\targetver.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SimpleSideScrollerFramework.rc" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB6313F-0EFD-4C76-94EE-30084956B2F2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -133,7 +139,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Common\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(ProjectDir)src\;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Box2D_v2.3.0\Box2D\Box2D;$(ProjectDir)src\;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir);$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
