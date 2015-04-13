@@ -177,6 +177,9 @@
     <ClCompile Include="src\sssf\gsm\ai\bots\BasicBulletBot.cpp">
       <Filter>src\sssf\gsm\ai\bots</Filter>
     </ClCompile>
+    <ClCompile Include="src\sssf\gsm\ai\bots\ShootingBot.cpp">
+      <Filter>src\sssf\gsm\ai\bots</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sssf_VS\stdafx.h">
@@ -331,6 +334,9 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\sssf\gsm\ai\bots\BasicBulletBot.h">
+      <Filter>src\sssf\gsm\ai\bots</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sssf\gsm\ai\bots\ShootingBot.h">
       <Filter>src\sssf\gsm\ai\bots</Filter>
     </ClInclude>
   </ItemGroup>

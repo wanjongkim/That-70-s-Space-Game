@@ -56,205 +56,206 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 
 		// YOU MIGHT WANT TO UNCOMMENT THIS FOR SOME TESTING,
 		// BUT IN THIS ASSIGNMENT, THE USER MOVES VIA MOUSE BUTTON PRESSES
-		if (input->isKeyDownForFirstTime(R_KEY))
-		{
-			player->getPhysicalProperties()->swapFireDir();
-		}
+		if (player->getCurrentState() != DEAD){
+			if (input->isKeyDownForFirstTime(R_KEY))
+			{
+				player->getPhysicalProperties()->swapFireDir();
+			}
 
-		if (input->isKeyDown(A_KEY))
-		{
-			vX = -PLAYER_SPEED;
-			player->setCurrentState(MOVE_LEFT);
-		}
-		if (input->isKeyDown(D_KEY))
-		{
-			vX = PLAYER_SPEED;
-			player->setCurrentState(MOVE_RIGHT);
-		}
-		if (input->isKeyDown(S_KEY))
-		{
-			vY = PLAYER_SPEED;
-			player->setCurrentState(MOVE_DOWN);
-		}
-		if (input->isKeyDown(W_KEY))
-		{
-			vY = -PLAYER_SPEED;
-			player->setCurrentState(MOVE_UP);
-		}
-		if (input->isKeyDownForFirstTime(G_KEY))
-		{
-			viewport->toggleDebugView();
-			game->getGraphics()->toggleDebugTextShouldBeRendered();
-		}
-		if (!input->isKeyDown(W_KEY) && !input->isKeyDown(S_KEY))
-		{
-			vY = 0.0f;
-			player->setCurrentState(IDLE);
-		}
-		if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY)){
+			if (input->isKeyDown(A_KEY) && pp->getX() >= 0)
+			{
+				vX = -PLAYER_SPEED;
+				player->setCurrentState(MOVE_LEFT);
+			}
+			if (input->isKeyDown(D_KEY) && pp->getX() <= 3200)
+			{
+				vX = PLAYER_SPEED;
+				player->setCurrentState(MOVE_RIGHT);
+			}
+			if (input->isKeyDown(S_KEY) && pp->getY() <= 1920)
+			{
+				vY = PLAYER_SPEED;
+				player->setCurrentState(MOVE_DOWN);
+			}
+			if (input->isKeyDown(W_KEY) && pp->getY() >= 0)
+			{
+				vY = -PLAYER_SPEED;
+				player->setCurrentState(MOVE_UP);
+			}
+			if (input->isKeyDownForFirstTime(G_KEY))
+			{
+				viewport->toggleDebugView();
+				game->getGraphics()->toggleDebugTextShouldBeRendered();
+			}
+			if (!input->isKeyDown(W_KEY) && !input->isKeyDown(S_KEY))
+			{
+				vY = 0.0f;
+				player->setCurrentState(IDLE);
+			}
+			if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY)){
 
-			vX = 0.0f;
-		}
-		
-		if (input->isKeyDownForFirstTime(P_KEY))
-		{
-			gsm->getPhysics()->togglePhysics();
-		}
-		if (input->isKeyDownForFirstTime(T_KEY))
-		{
-			gsm->getPhysics()->activateForSingleUpdate();
-		}
+				vX = 0.0f;
+			}
 
-		// NOW SET THE ACTUAL PLAYER VELOCITY
- 		pp->setVelocity(vX, vY);
+			if (input->isKeyDownForFirstTime(P_KEY))
+			{
+				gsm->getPhysics()->togglePhysics();
+			}
+			if (input->isKeyDownForFirstTime(T_KEY))
+			{
+				gsm->getPhysics()->activateForSingleUpdate();
+			}
+
+			// NOW SET THE ACTUAL PLAYER VELOCITY
+			pp->setVelocity(vX, vY);
 
 
-		//PLAYER SHOOTING
-		int shotTime = player->getPhysicalProperties()->getShot();
-		if (player->getPhysicalProperties()->getFireDir()){
-			if (input->isKeyDownForFirstTime(I_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX() + 46, pp->getY());
-				bulletProps->setVelocity(0.0f, -PLAYER_BULLET_SPEED);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
+			//PLAYER SHOOTING
+			int shotTime = player->getPhysicalProperties()->getShot();
+			if (player->getPhysicalProperties()->getFireDir()){
+				if (input->isKeyDownForFirstTime(I_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX() + 46, pp->getY());
+					bulletProps->setVelocity(0.0f, -PLAYER_BULLET_SPEED);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
 
+				}
+				if (input->isKeyDownForFirstTime(J_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX(), pp->getY() + 50);
+					bulletProps->setVelocity(-PLAYER_BULLET_SPEED, 0.0f);
+					bulletProps->setSpriteType(4);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
+				}
+				if (input->isKeyDownForFirstTime(K_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX() + 46, pp->getY() + 110);
+					bulletProps->setVelocity(0.0f, PLAYER_BULLET_SPEED);
+					bulletProps->setSpriteType(4);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
+				}
+				if (input->isKeyDownForFirstTime(L_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX() + 110, pp->getY() + 50);
+					bulletProps->setVelocity(PLAYER_BULLET_SPEED, 0);
+					bulletProps->setSpriteType(4);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
+				}
 			}
-			if (input->isKeyDownForFirstTime(J_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX(), pp->getY() + 50);
-				bulletProps->setVelocity(-PLAYER_BULLET_SPEED, 0.0f);
-				bulletProps->setSpriteType(4);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
+			else{
+				if (input->isKeyDownForFirstTime(I_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX() + 70, pp->getY() + 20);
+					bulletProps->setVelocity(PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED);
+					bulletProps->setSpriteType(4);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
+				}
+				if (input->isKeyDownForFirstTime(J_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX() + 10, pp->getY() + 20);
+					bulletProps->setVelocity(-PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED);
+					bulletProps->setSpriteType(4);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
+				}
+				if (input->isKeyDownForFirstTime(K_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX() + 20, pp->getY() + 90);
+					bulletProps->setVelocity(-PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED);
+					bulletProps->setSpriteType(4);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
+				}
+				if (input->isKeyDownForFirstTime(L_KEY) && shotTime == 0)
+				{
+					AnimatedSprite *playerBullet = new AnimatedSprite();
+					Physics *physics = gsm->getPhysics();
+					Bot *bot = new BasicBulletBot();
+					physics->addCollidableObject(bot);
+					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
+					bulletProps->setPosition(pp->getX() + 70, pp->getY() + 90);
+					bulletProps->setVelocity(PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED);
+					bulletProps->setSpriteType(4);
+					bot->setSpriteType(playerbulletSpriteType);
+					bot->setAlpha(255);
+					bot->setCurrentState(IDLE);
+					sm->addBot(bot);
+					bot->affixTightAABBBoundingVolume();
+					player->getPhysicalProperties()->setShot(30);
+				}
 			}
-			if (input->isKeyDownForFirstTime(K_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX() + 46, pp->getY() + 110);
-				bulletProps->setVelocity(0.0f, PLAYER_BULLET_SPEED);
-				bulletProps->setSpriteType(4);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
-			}
-			if (input->isKeyDownForFirstTime(L_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX()+110, pp->getY() + 50);
-				bulletProps->setVelocity(PLAYER_BULLET_SPEED, 0);
-				bulletProps->setSpriteType(4);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
+			if (shotTime > 0){
+				player->getPhysicalProperties()->setShot(player->getPhysicalProperties()->getShot() - 1);
 			}
 		}
-		else{
-			if (input->isKeyDownForFirstTime(I_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX() + 70, pp->getY()+20);
-				bulletProps->setVelocity(PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED);
-				bulletProps->setSpriteType(4);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
-			}
-			if (input->isKeyDownForFirstTime(J_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX() + 10, pp->getY() + 20);
-				bulletProps->setVelocity(-PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED);
-				bulletProps->setSpriteType(4);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
-			}
-			if (input->isKeyDownForFirstTime(K_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX() + 20, pp->getY() + 90);
-				bulletProps->setVelocity(-PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED);
-				bulletProps->setSpriteType(4);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
-			}
-			if (input->isKeyDownForFirstTime(L_KEY) && shotTime == 0)
-			{
-				AnimatedSprite *playerBullet = new AnimatedSprite();
-				Physics *physics = gsm->getPhysics();
-				Bot *bot = new BasicBulletBot();
-				physics->addCollidableObject(bot);
-				PhysicalProperties *bulletProps = bot->getPhysicalProperties();
-				bulletProps->setPosition(pp->getX() + 70, pp->getY() + 90);
-				bulletProps->setVelocity(PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED);
-				bulletProps->setSpriteType(4);
-				bot->setSpriteType(playerbulletSpriteType);
-				bot->setAlpha(255);
-				bot->setCurrentState(IDLE);
-				sm->addBot(bot);
-				bot->affixTightAABBBoundingVolume();
-				player->getPhysicalProperties()->setShot(30);
-			}
-		}
-		if (shotTime > 0){
-			player->getPhysicalProperties()->setShot(player->getPhysicalProperties()->getShot() - 1);
-		}
-
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;
@@ -289,7 +290,10 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			else if (playerDistX < -30){
 				viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
 			}
-			else viewportVx = player->getPhysicalProperties()->getVelocityX();
+			else {
+				viewportVy = player->getPhysicalProperties()->getVelocityY();
+				viewportVx = player->getPhysicalProperties()->getVelocityX();
+			}
 			if (playerDistY > 30){
 				viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
 			}

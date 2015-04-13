@@ -47,6 +47,7 @@ public:
 	void initColors(GameGraphics *graphics,	map<wstring,wstring> *properties);
 	void initViewport(GameGUI *gui, map<wstring,wstring> *properties);
 	void makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY);
+	void makeShooterBot(Game *game, AnimatedSpriteType *shootingBotType, float initX, float initY, int shotCyc, int moveCyc, int moveDir);
 
 	// AND SOME HELPER METHODS FOR LOADING THE GUI
 	void initCursor(GameGUI *gui, DirectXTextureManager *guiTextureManager);

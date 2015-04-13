@@ -12,6 +12,7 @@
 #include "sssf\graphics\GameGraphics.h"
 #include "sssf\gsm\ai\bots\RandomJumpingBot.h"
 #include "sssf\gsm\ai\bots\BasicBulletBot.h"
+#include "sssf\gsm\ai\bots\ShootingBot.h"
 #include "sssf\gsm\state\GameState.h"
 #include "sssf\gsm\world\TiledLayer.h"
 #include "sssf\gui\Cursor.h"
@@ -190,14 +191,31 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	playerProps->setVelocity(0.0f, 0.0f);
 	playerProps->setAccelerationX(0);
 	playerProps->setAccelerationY(0);
+	playerProps->setSpriteType(0);
 	player->setOnTileThisFrame(false);
 	player->setOnTileLastFrame(false);
-	player->affixTightAABBBoundingVolume();
+	player->affixPlayerAABBBoundingVolume();
 
-	
+	AnimatedSpriteType *shootingSpriteType = spriteManager->getSpriteType(1);
+	makeShooterBot(game, shootingSpriteType, 1536, 128, 30, 70, 3);
 
 
+}
 
+
+void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootingBotType, float initX, float initY, int shotCyc, int moveCyc, int moveDir)
+{
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	Physics *physics = game->getGSM()->getPhysics();
+	ShootingBot *bot = new ShootingBot(shotCyc, moveCyc, moveDir);
+	physics->addCollidableObject(bot);
+	PhysicalProperties *pp = bot->getPhysicalProperties();
+	pp->setPosition(initX, initY);
+	bot->setSpriteType(shootingBotType);
+	bot->setCurrentState(IDLE);
+	bot->setAlpha(255);
+	spriteManager->addBot(bot);
+	bot->affixTightAABBBoundingVolume();
 }
 
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)

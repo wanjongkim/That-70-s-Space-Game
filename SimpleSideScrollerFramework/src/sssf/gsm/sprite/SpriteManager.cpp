@@ -154,6 +154,18 @@ void SpriteManager::update(Game *game)
 
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
+	if (player.getCurrentState() == DEAD){
+		player.getPhysicalProperties()->setVelocity(0, 0);
+		if (player.getPhysicalProperties()->getDeathCount() == 50){
+			player.setCurrentlyCollidable(false);
+			player.getPhysicalProperties()->setPosition(100, 100);
+			player.setCurrentState(IDLE);
+			player.getPhysicalProperties()->setDeathCount(0);
+		}
+		else{
+			player.getPhysicalProperties()->setDeathCount(player.getPhysicalProperties()->getDeathCount() + 1);
+		}
+	}
 
 	// NOW UPDATE THE REST OF THE SPRITES
 	list<Bot*>::iterator botIterator;
@@ -162,7 +174,7 @@ void SpriteManager::update(Game *game)
 	{
 		Bot *bot = (*botIterator);
 		if (bot->getCurrentState() == DEAD){
-			bot->getPhysicalProperties()->setVelocity(0, bot->getPhysicalProperties()->getVelocityY());
+			bot->getPhysicalProperties()->setVelocity(0, 0);
 			if (bot->getPhysicalProperties()->getSpriteType() == 4){
 				bot->setCurrentlyCollidable(false);
 				botIterator = bots.erase(botIterator);
@@ -178,6 +190,9 @@ void SpriteManager::update(Game *game)
 				bot->updateSprite();
 				botIterator++;
 			}
+		}
+		else if (bot->getPhysicalProperties()->getX() <= 0 || bot->getPhysicalProperties()->getX() >= 3200 || bot->getPhysicalProperties()->getY() <= 0 || bot->getPhysicalProperties()->getY() >= 1920){
+			botIterator = bots.erase(botIterator);
 		}
 		else{
 			bot->think(game);

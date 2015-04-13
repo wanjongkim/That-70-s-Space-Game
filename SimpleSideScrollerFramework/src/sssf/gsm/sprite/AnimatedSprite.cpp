@@ -106,6 +106,14 @@ void AnimatedSprite::affixTightAABBBoundingVolume()
 	boundingVolume.setWidth((float)spriteType->getTextureWidth());
 	boundingVolume.setHeight((float)spriteType->getTextureHeight());
 }
+
+void AnimatedSprite::affixPlayerAABBBoundingVolume()
+{
+	boundingVolume.setCenterX(pp.getX() + 65);
+	boundingVolume.setCenterY(pp.getY() + 77);
+	boundingVolume.setWidth((float)74);
+	boundingVolume.setHeight((float)98);
+}
 	
 
 void AnimatedSprite::correctToTightBoundingVolume()

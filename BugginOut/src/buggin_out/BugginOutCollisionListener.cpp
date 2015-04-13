@@ -20,8 +20,15 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 		if (col1->getPhysicalProperties()->getSpriteType() == 4){
 			an1->setCurrentState(DEAD);
 		}
-		else if (col1->getPhysicalProperties()->getSpriteType() == 4){
+		else if (col2->getPhysicalProperties()->getSpriteType() == 4){
+			an2->setCurrentState(DEAD);
+		}
+
+		if (col1->getPhysicalProperties()->getSpriteType() == 0){
 			an1->setCurrentState(DEAD);
+		}
+		else if (col2->getPhysicalProperties()->getSpriteType() == 0){
+			an2->setCurrentState(DEAD);
 		}
 
 	}

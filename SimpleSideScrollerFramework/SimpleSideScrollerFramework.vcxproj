@@ -24,6 +24,7 @@
     <ClCompile Include="src\sssf\gsm\ai\bots\BasicBulletBot.cpp" />
     <ClCompile Include="src\sssf\gsm\ai\bots\RandomFloatingBot.cpp" />
     <ClCompile Include="src\sssf\gsm\ai\bots\RandomJumpingBot.cpp" />
+    <ClCompile Include="src\sssf\gsm\ai\bots\ShootingBot.cpp" />
     <ClCompile Include="src\sssf\gsm\physics\AABB.cpp" />
     <ClCompile Include="src\sssf\gsm\physics\CollidableObject.cpp" />
     <ClCompile Include="src\sssf\gsm\physics\Physics.cpp" />
@@ -65,6 +66,7 @@
     <ClInclude Include="src\sssf\gsm\ai\bots\BasicBulletBot.h" />
     <ClInclude Include="src\sssf\gsm\ai\bots\RandomFloatingBot.h" />
     <ClInclude Include="src\sssf\gsm\ai\bots\RandomJumpingBot.h" />
+    <ClInclude Include="src\sssf\gsm\ai\bots\ShootingBot.h" />
     <ClInclude Include="src\sssf\gsm\physics\AABB.h" />
     <ClInclude Include="src\sssf\gsm\physics\CollidableObject.h" />
     <ClInclude Include="src\sssf\gsm\physics\Collision.h" />

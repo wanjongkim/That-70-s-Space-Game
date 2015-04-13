@@ -60,5 +60,6 @@ public:
 	void setCurrentState(wstring newState);
 	void updateSprite();
 	void affixTightAABBBoundingVolume();
+	void affixPlayerAABBBoundingVolume();
 	void correctToTightBoundingVolume();
 };
