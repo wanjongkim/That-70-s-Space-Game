@@ -15,36 +15,38 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 	CollidableObject *col2 = collision->getCO2();
 	AnimatedSprite* an1 = dynamic_cast<AnimatedSprite*>(col1);
 	AnimatedSprite* an2 = dynamic_cast<AnimatedSprite*>(col2);
-	if (collision->isCollisionWithTile())
-	{
-		if (col1->getPhysicalProperties()->getSpriteType() == 4){
-			an1->setCurrentState(DEAD);
-		}
-		else if (col2->getPhysicalProperties()->getSpriteType() == 4){
-			an2->setCurrentState(DEAD);
-		}
-
-		if (col1->getPhysicalProperties()->getSpriteType() == 0){
-			an1->setCurrentState(DEAD);
-		}
-		else if (col2->getPhysicalProperties()->getSpriteType() == 0){
-			an2->setCurrentState(DEAD);
-		}
-
-	}
-	else
-	{
-		CollidableObject *sprite = collision->getCO1();
-		if (sprite->getCollisionEdge() == BOTTOM_EDGE)
+	if (col1->getPhysicalProperties()->isCollidable() && col2->getPhysicalProperties()->isCollidable()){
+		if (collision->isCollisionWithTile())
 		{
-			// ENEMY IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
-			// AND MARK IT FOR REMOVAL
+			if (col1->getPhysicalProperties()->getSpriteType() == 4 || col1->getPhysicalProperties()->getSpriteType() == 8){
+				an1->setCurrentState(DEAD);
+			}
+			else if (col2->getPhysicalProperties()->getSpriteType() == 4 || col2->getPhysicalProperties()->getSpriteType() == 8){
+				an2->setCurrentState(DEAD);
+			}
+
+
+			if (col1->getPhysicalProperties()->getSpriteType() == 0 || col1->getPhysicalProperties()->getSpriteType() == 1){
+				an1->setCurrentState(DEAD);
+			}
+			else if (col2->getPhysicalProperties()->getSpriteType() == 0 || col2->getPhysicalProperties()->getSpriteType() == 1){
+				an2->setCurrentState(DEAD);
+			}
+
 		}
 		else
 		{
-			// PLAYER IS DEAD - WE SHOULD PLAY A DEATH ANIMATION
-			// AND MARK IT FOR REMOVAL/RESPAWN/RESTART GAME, WHATEVER
-			// THE DEMANDS OF THE GAME ARE
+			if ((col1->getPhysicalProperties()->getSpriteType() == 8 && col2->getPhysicalProperties()->getSpriteType() == 0) || (col1->getPhysicalProperties()->getSpriteType() == 0 && col2->getPhysicalProperties()->getSpriteType() == 8)){
+				an1->setCurrentState(DEAD);
+				an2->setCurrentState(DEAD);
+			}
+			if ((col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 5) || (col1->getPhysicalProperties()->getSpriteType() == 5 && col2->getPhysicalProperties()->getSpriteType() == 4)
+				|| (col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 3) || (col1->getPhysicalProperties()->getSpriteType() == 3 && col2->getPhysicalProperties()->getSpriteType() == 4)
+				|| (col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 2) || (col1->getPhysicalProperties()->getSpriteType() == 2 && col2->getPhysicalProperties()->getSpriteType() == 4)
+				|| (col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 1) || (col1->getPhysicalProperties()->getSpriteType() == 1 && col2->getPhysicalProperties()->getSpriteType() == 4)){
+				an1->setCurrentState(DEAD);
+				an2->setCurrentState(DEAD);
+			}
 		}
 	}
 }

@@ -28,6 +28,7 @@ public:
 	void setinitX(int x){ initX = x; }
 	void setinitY(int y){ initY = y; }
 	void	setTexSize(int initx, int inity){ this->getSpriteType()->setTextureSize(8, 8); }
+	void shootAtPoint(float x, float y, Game *game);
 	void	think(Game *game);
 
 };

@@ -196,14 +196,25 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setOnTileLastFrame(false);
 	player->affixPlayerAABBBoundingVolume();
 
-	AnimatedSpriteType *shootingSpriteType = spriteManager->getSpriteType(1);
-	makeShooterBot(game, shootingSpriteType, 1536, 128, 30, 70, 3);
+	AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
+	AnimatedSpriteType *shootingRightSpriteType = spriteManager->getSpriteType(2);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
 
 
 }
 
-
-void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootingBotType, float initX, float initY, int shotCyc, int moveCyc, int moveDir)
+// MAKE A BOT THAT MOVES IN A CERTAIN DIRECTION, FOR A CERTAIN NUMBER OF FRAMES, WITH A SHOT EVERY GIVEN NUMBER OF FRAMES
+//DIRECTIONS: 1 = UP, 2 = RIGHT. 3 = DOWN, 4 = LEFT
+void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootingBotType, int spriteType, float initX, float initY, int shotCyc, int moveCyc, int moveDir)
 {
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	Physics *physics = game->getGSM()->getPhysics();
@@ -211,6 +222,7 @@ void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootin
 	physics->addCollidableObject(bot);
 	PhysicalProperties *pp = bot->getPhysicalProperties();
 	pp->setPosition(initX, initY);
+	pp->setSpriteType(spriteType);
 	bot->setSpriteType(shootingBotType);
 	bot->setCurrentState(IDLE);
 	bot->setAlpha(255);

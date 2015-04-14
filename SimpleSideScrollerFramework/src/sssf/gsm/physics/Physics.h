@@ -77,6 +77,7 @@ public:
 	// PUBLIC METHODS DEFINED INSIDE Physics.cpp - YOU ARE WELCOME TO ADD MORE OR CHANGE WHAT YOU LIKE
 	void addCollidableObject(CollidableObject *collidableObjectToAdd);
 	void addTileCollision(CollidableObject *dynamicObject, Tile *tile, float tileX, float tileY, float tileWidth, float tileHeight);
+	void addSpriteCollison(CollidableObject *co1, CollidableObject *co2);
 	void removeCollidableObject(CollidableObject *collidableObjectToRemove);
 	void togglePhysics() { activated = !activated; }
 	void update(Game *game);

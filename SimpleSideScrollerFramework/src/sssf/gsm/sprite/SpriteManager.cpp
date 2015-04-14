@@ -175,13 +175,13 @@ void SpriteManager::update(Game *game)
 		Bot *bot = (*botIterator);
 		if (bot->getCurrentState() == DEAD){
 			bot->getPhysicalProperties()->setVelocity(0, 0);
-			if (bot->getPhysicalProperties()->getSpriteType() == 4){
-				bot->setCurrentlyCollidable(false);
+			if (bot->getPhysicalProperties()->getSpriteType() == 4 || bot->getPhysicalProperties()->getSpriteType() == 8){
+				bot->getPhysicalProperties()->setCollidable(false);
 				botIterator = bots.erase(botIterator);
 				//delete(bot);
 			}
-			else if (bot->getPhysicalProperties()->getDeathCount() == 30){
-				bot->setCurrentlyCollidable(false);
+			else if (bot->getPhysicalProperties()->getDeathCount() == 50){
+				bot->getPhysicalProperties()->setCollidable(false);
 				botIterator = bots.erase(botIterator);
 				//delete(bot);
 			}

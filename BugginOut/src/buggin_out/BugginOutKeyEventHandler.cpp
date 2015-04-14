@@ -65,28 +65,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			if (input->isKeyDown(A_KEY) && pp->getX() >= 0)
 			{
 				vX = -PLAYER_SPEED;
-				if (input->isKeyDown(S_KEY)) player->setCurrentState(MOVE_DOWN_LEFT);
-				else if (input->isKeyDown(W_KEY)) player->setCurrentState(MOVE_UP_LEFT);
-				else player->setCurrentState(MOVE_LEFT);
+				player->setCurrentState(MOVE_LEFT);
 			}
 			if (input->isKeyDown(D_KEY) && pp->getX() <= 3200)
 			{
 				vX = PLAYER_SPEED;
-				if (input->isKeyDown(S_KEY)) player->setCurrentState(MOVE_DOWN_RIGHT);
-				else if (input->isKeyDown(W_KEY)) player->setCurrentState(MOVE_UP_RIGHT);
-				else  player->setCurrentState(MOVE_RIGHT);
+				player->setCurrentState(MOVE_RIGHT);
 			}
 			if (input->isKeyDown(S_KEY) && pp->getY() <= 1920)
 			{
 				vY = PLAYER_SPEED;
-				if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY))
-					player->setCurrentState(MOVE_DOWN);
+				player->setCurrentState(MOVE_DOWN);
 			}
 			if (input->isKeyDown(W_KEY) && pp->getY() >= 0)
 			{
 				vY = -PLAYER_SPEED;
-				if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY))
-					player->setCurrentState(MOVE_UP);
+				player->setCurrentState(MOVE_UP);
 			}
 			if (input->isKeyDownForFirstTime(G_KEY))
 			{
@@ -96,7 +90,6 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			if (!input->isKeyDown(W_KEY) && !input->isKeyDown(S_KEY))
 			{
 				vY = 0.0f;
-				player->setCurrentState(IDLE);
 			}
 			if (!input->isKeyDown(A_KEY) && !input->isKeyDown(D_KEY)){
 
@@ -119,7 +112,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			//PLAYER SHOOTING
 			int shotTime = player->getPhysicalProperties()->getShot();
 			if (player->getPhysicalProperties()->getFireDir()){
-				if (input->isKeyDownForFirstTime(I_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(UP_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -128,6 +121,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					PhysicalProperties *bulletProps = bot->getPhysicalProperties();
 					bulletProps->setPosition(pp->getX() + 46, pp->getY());
 					bulletProps->setVelocity(0.0f, -PLAYER_BULLET_SPEED);
+					bulletProps->setSpriteType(4);
 					bot->setSpriteType(playerbulletSpriteType);
 					bot->setAlpha(255);
 					bot->setCurrentState(IDLE);
@@ -136,7 +130,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					player->getPhysicalProperties()->setShot(30);
 
 				}
-				if (input->isKeyDownForFirstTime(J_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(LEFT_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -153,7 +147,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
 				}
-				if (input->isKeyDownForFirstTime(K_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(DOWN_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -170,7 +164,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
 				}
-				if (input->isKeyDownForFirstTime(L_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(RIGHT_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -189,7 +183,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				}
 			}
 			else{
-				if (input->isKeyDownForFirstTime(I_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(UP_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -206,7 +200,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
 				}
-				if (input->isKeyDownForFirstTime(J_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(LEFT_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -223,7 +217,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
 				}
-				if (input->isKeyDownForFirstTime(K_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(DOWN_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -240,7 +234,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
 				}
-				if (input->isKeyDownForFirstTime(L_KEY) && shotTime == 0)
+				if (input->isKeyDownForFirstTime(RIGHT_KEY) && shotTime == 0)
 				{
 					AnimatedSprite *playerBullet = new AnimatedSprite();
 					Physics *physics = gsm->getPhysics();
@@ -267,27 +261,27 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		float viewportVy = 0.0f;
 		float playerDistX = 0.0f;
 		float playerDistY = 0.0f;
-		if (input->isKeyDown(UP_KEY))
+		if (input->isKeyDown(I_KEY))
 		{
 			viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
-		if (input->isKeyDown(DOWN_KEY))
+		if (input->isKeyDown(K_KEY))
 		{
 			viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
-		if (input->isKeyDown(LEFT_KEY))
+		if (input->isKeyDown(J_KEY))
 		{
 			viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
-		if (input->isKeyDown(RIGHT_KEY))
+		if (input->isKeyDown(L_KEY))
 		{
 			viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
-		if (!input->isKeyDown(UP_KEY) && !input->isKeyDown(DOWN_KEY) && !input->isKeyDown(LEFT_KEY) && !input->isKeyDown(RIGHT_KEY)){
+		if (!input->isKeyDown(I_KEY) && !input->isKeyDown(K_KEY) && !input->isKeyDown(J_KEY) && !input->isKeyDown(L_KEY)){
 			playerDistX = (viewport->getViewportX() + viewport->getViewportWidth() / 2) - (player->getPhysicalProperties()->getX());
 			playerDistY = (viewport->getViewportY() + viewport->getViewportHeight() / 2.2) - (player->getPhysicalProperties()->getY());
 			if (playerDistX > 30){
