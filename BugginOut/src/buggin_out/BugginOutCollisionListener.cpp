@@ -40,13 +40,13 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 				an1->setCurrentState(DEAD);
 				an2->setCurrentState(DEAD);
 			}
-			if ((col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 5) || (col1->getPhysicalProperties()->getSpriteType() == 5 && col2->getPhysicalProperties()->getSpriteType() == 4)
+			/*if ((col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 5) || (col1->getPhysicalProperties()->getSpriteType() == 5 && col2->getPhysicalProperties()->getSpriteType() == 4)
 				|| (col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 3) || (col1->getPhysicalProperties()->getSpriteType() == 3 && col2->getPhysicalProperties()->getSpriteType() == 4)
 				|| (col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 2) || (col1->getPhysicalProperties()->getSpriteType() == 2 && col2->getPhysicalProperties()->getSpriteType() == 4)
 				|| (col1->getPhysicalProperties()->getSpriteType() == 4 && col2->getPhysicalProperties()->getSpriteType() == 1) || (col1->getPhysicalProperties()->getSpriteType() == 1 && col2->getPhysicalProperties()->getSpriteType() == 4)){
 				an1->setCurrentState(DEAD);
 				an2->setCurrentState(DEAD);
-			}
+			}*/
 		}
 	}
 }

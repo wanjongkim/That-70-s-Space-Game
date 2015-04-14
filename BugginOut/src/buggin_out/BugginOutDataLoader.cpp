@@ -198,16 +198,19 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
 	AnimatedSpriteType *shootingRightSpriteType = spriteManager->getSpriteType(2);
+	AnimatedSpriteType *shootingUpSpriteType = spriteManager->getSpriteType(3);
+	AnimatedSpriteType *shootingDownSpriteType = spriteManager->getSpriteType(5);
 	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 20, 20, 30, 45, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 30, 768, 30, 70, 3);
+	makeShooterBot(game, shootingUpSpriteType, 3, 1152, 800, 30, 50, 2);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 3136, 128, 30, 50, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 30, 1300, 30, 45, 3);
+	makeShooterBot(game, shootingDownSpriteType, 5, 896, 1218, 30, 70, 2);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 2176, 1400, 30, 70, 1);
+    makeShooterBot(game, shootingLeftSpriteType, 1, 2304, 448, 30, 10, 3);
+	makeShooterBot(game, shootingRightSpriteType, 2, 2370, 400, 30, 12, 3);
+	makeShooterBot(game, shootingUpSpriteType, 3, 2304, 1856, 30, 40, 2);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 2880, 1280, 30, 10, 1);
 
 
 }

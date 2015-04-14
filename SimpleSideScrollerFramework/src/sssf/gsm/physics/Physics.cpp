@@ -255,26 +255,6 @@ void Physics::update(Game *game)
 		spritesIt++;
 	}
 
-	spritesIt = sortedSweptShapes[LEFT_EDGE]->begin();
-	vector<CollidableObject*>::iterator spritesItTwo = sortedSweptShapes[LEFT_EDGE]->begin();
-	/*while (spritesIt != sortedSweptShapes[LEFT_EDGE]->end())
-	{
-		spritesItTwo = sortedSweptShapes[LEFT_EDGE]->begin();
-		CollidableObject *sprite = (*spritesIt);
-		prepSpriteForCollisionTesting(world, sprite);
-		while (spritesItTwo != sortedSweptShapes[LEFT_EDGE]->end()){
-			CollidableObject *sprite2 = (*spritesItTwo);
-			AABB *ai1 = sprite->getSweptShape();
-			AABB *ai2 = sprite2->getSweptShape();
-			if (ai1->getCenterX() == ai2->getCenterX() && ai1->getCenterY() == ai2->getCenterY() && ai1->getLeft() == ai2->getLeft() && ai1->getRight() == ai2->getRight() && ai1->getTop() == ai2->getTop() && ai1->getBottom() == ai2->getBottom()){
-			}
-			else if (ai1->overlaps(ai2)){
-				addSpriteCollison(sprite, sprite2);
-			}
-			spritesItTwo++;
-		}
-		spritesIt++;
-	}*/
 
 	// *** LOOP STARTS HERE. WE'LL DO THIS UNTIL THERE ARE NO
 	// MORE COLLISIONS TO RESOLVE FOR THIS FRAME
