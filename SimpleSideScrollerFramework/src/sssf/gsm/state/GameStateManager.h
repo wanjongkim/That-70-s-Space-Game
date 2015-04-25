@@ -26,6 +26,7 @@
 #include "sssf\gsm\world\World.h"
 #include "sssf\gsm\world\WorldLayer.h"
 #include "Box2D\Dynamics\b2World.h"
+#include "sssf\audio\AudioManager.h"
 
 class Game;
 
@@ -61,6 +62,9 @@ private:
 	// NOTE THAT WE CALL THE DYNAMIC OBJECTS "SPRITES"
 	SpriteManager *spriteManager;
 
+	// Audio
+	AudioManager* audioManager;
+
 	// FOR DOING ALL COLLISION DETECTION AND RESOLUTION
 	Physics			physics;
 
@@ -72,6 +76,7 @@ public:
 	unsigned int	getNumLevels()			{ return levelNames.size();			}
 	Physics*		getPhysics()			{ return &physics;					}
 	SpriteManager*	getSpriteManager()		{ return spriteManager;				}
+	AudioManager*	getAudioManager()		{ return audioManager;				}
 	World*			getWorld()				{ return &world;					}
 	wstring			getCurrentLevelName()	{ return levelNames[currentLevel];	}
 

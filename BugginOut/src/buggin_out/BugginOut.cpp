@@ -43,6 +43,9 @@
 #include "sssf\platforms\DirectX\DirectXGraphics.h"
 #include "sssf\platforms\DirectX\DirectXTextureManager.h"
 
+// Audio
+#include "sssf\audio\AudioManager.h"
+
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
 	then initialize all the platform-dependent technologies, then construct all the custom data for our 
@@ -69,6 +72,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	bugginOutGame->setDataLoader(bugginOutDataLoader);
 	bugginOutDataLoader->loadGame(bugginOutGame, W_INIT_FILE);
 	
+	bugginOutGame->getGSM()->getAudioManager()->loadAudio(W_WAVE_BANK, W_STREAMING_WAVE_BANK, W_SOUND_BANK);
+	bugginOutGame->getGSM()->getAudioManager()->loadCue(CUE_ZAP); 
+	bugginOutGame->getGSM()->getAudioManager()->loadCue(CUE_SONG_1);
+
 	// WHAT WE SHOULD BE DOING HERE IS LOADING THE GAME DATA FROM FILES. THIS
 	// MEANS THE GUIS THEMSELVES AS WELL AS THE LEVELS. THAT WILL BE LEFT
 	// FOR BECHMARK HWS. FOR NOW WE WILL JUST HARD CODE THE LOADING OF THE GUI

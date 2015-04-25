@@ -14,6 +14,7 @@
     <Text Include="src\sssf_VS\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\sssf\audio\AudioManager.cpp" />
     <ClCompile Include="src\sssf\data_loader\GameDataLoader.cpp" />
     <ClCompile Include="src\sssf\game\Game.cpp" />
     <ClCompile Include="src\sssf\game\WStringTable.cpp" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="src\sssf\audio\AudioManager.h" />
     <ClInclude Include="src\sssf\data_loader\GameDataLoader.h" />
     <ClInclude Include="src\sssf\game\Game.h" />
     <ClInclude Include="src\sssf\game\IllegalArgumentException.h" />
@@ -142,7 +144,7 @@
     <OutDir>$(SolutionDir)Common\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)\Box2D_v2.3.0\Box2D;$(ProjectDir)src\;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir);$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Common;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

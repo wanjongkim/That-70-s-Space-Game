@@ -65,6 +65,9 @@
     <Filter Include="src\sssf\platforms\Windows">
       <UniqueIdentifier>{9a2ecd2f-2b7c-47fd-bb83-6c6d66626dd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\sssf\audio">
+      <UniqueIdentifier>{11161dc1-90b6-4e00-9890-a3c1433d9f07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\sssf_VS\ReadMe.txt">
@@ -179,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="src\sssf\gsm\ai\bots\ShootingBot.cpp">
       <Filter>src\sssf\gsm\ai\bots</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sssf\audio\AudioManager.cpp">
+      <Filter>src\sssf\audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="src\sssf\gsm\ai\bots\ShootingBot.h">
       <Filter>src\sssf\gsm\ai\bots</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sssf\audio\AudioManager.h">
+      <Filter>src\sssf\audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

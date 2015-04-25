@@ -17,6 +17,7 @@
 #include "sssf\gsm\state\GameState.h"
 #include "sssf\gsm\state\GameStateManager.h"
 #include "sssf\gsm\sprite\SpriteManager.h"
+#include "sssf\audio\AudioManager.h"
 
 /*
 	GameStateManager - Default Constructor, it starts the app at the
@@ -25,6 +26,8 @@
 GameStateManager::GameStateManager()	
 {
 	spriteManager = new SpriteManager();
+	audioManager = new AudioManager();
+	audioManager->initialize();
 	b2Vec2* vec = new b2Vec2(0.0, 0.0);
 	bWorld = new b2World(*vec);
 	currentGameState = GS_SPLASH_SCREEN;

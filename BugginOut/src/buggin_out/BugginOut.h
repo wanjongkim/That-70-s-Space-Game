@@ -56,6 +56,15 @@ static const wstring    W_EXIT_IMAGE_MO_PATH = L"data/gui/buttons/exit_game_mo.p
 static const wstring    W_QUIT_IMAGE_PATH = L"data/gui/buttons/quit.png";
 static const wstring    W_QUIT_IMAGE_MO_PATH = L"data/gui/buttons/quit_mo.png";
 
+// For Audio
+static const wstring	W_WAVE_BANK = L"data/audio/WaveBank.xwb";
+static const wstring	W_STREAMING_WAVE_BANK = L"data/audio/StreamingWaveBank.xwb";
+static const wstring	W_SOUND_BANK = L"data/audio/SoundBank.xsb";
+
+// Audio cues
+static const string		CUE_ZAP = "zap";
+static const string		CUE_SONG_1 = "song1";
+
 // FOR OUR SPRITE
 static const wstring	SPRITE_TYPES_DIR = L"data/sprite_types/";
 static const wstring	SPRITE_TYPES_LIST = SPRITE_TYPES_DIR + L"sprite_type_list.xml";
