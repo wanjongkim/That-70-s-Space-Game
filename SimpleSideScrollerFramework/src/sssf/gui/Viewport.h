@@ -33,6 +33,8 @@ private:
 	bool viewportToggled;
 	int toggleOffsetY;
 	int normalOffsetY;
+	int Vx;
+	int Vy;
 
 public:
 	// INLINED ACCESSOR METHODS
@@ -46,6 +48,18 @@ public:
 	int getViewportOffsetY()	{ return viewportOffsetY;		}
 
 	// INLINED MUTATOR METHODS
+	void setVx(int initVx){
+		Vx = initVx;
+	}
+	void setVy(int initVy){
+		Vy = initVy;
+	}
+	int getVx(){
+		return Vx;
+	}
+	int getVy(){
+		return Vy;
+	}
 	void setScrollSpeedX(int initScrollSpeedX)
 	{ scrollSpeedX = initScrollSpeedX;		}
 	void setScrollSpeedY(int initScrollSpeedY)

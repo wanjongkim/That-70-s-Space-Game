@@ -32,6 +32,8 @@ Viewport::Viewport()
 	viewportHeight = 0;
 	viewportOffsetX = 0;
 	viewportOffsetY = 0;
+	Vy = 0;
+	Vx = 0;
 }
 
 /*

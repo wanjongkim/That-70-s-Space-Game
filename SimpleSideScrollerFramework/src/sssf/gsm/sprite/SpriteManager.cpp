@@ -152,6 +152,23 @@ void SpriteManager::update(Game *game)
 	static const wstring DEAD = (L"DEAD");
 	static const wstring IDLE = (L"IDLE");
 
+	// UPDATE PHYSICAL PROPERTIES OF EACH SPRITE FROM BOX2D
+	// THIS IS SO THE RENDERING STEP WON'T NEED TO BE CHANGED, ALL CONVERSION IS DONE HERE
+	b2Body* b = game->getGSM()->getb2World()->GetBodyList();//get start of list
+	while (b != NULL) {
+
+
+		AnimatedSprite* body = static_cast<AnimatedSprite*>(b->GetUserData());
+		if (body != NULL) {
+			body->getPhysicalProperties()->setPosition((b->GetPosition().x * 64) - (body->getSpriteType()->getTextureWidth() / 2), ((50 - b->GetPosition().y) * 64) - (body->getSpriteType()->getTextureHeight() / 2));
+			body->getPhysicalProperties()->setVelocity(b->GetLinearVelocity().x, b->GetLinearVelocity().y);
+
+		}
+
+		//continue to next body
+		b = b->GetNext();
+	}
+
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 	if (player.getCurrentState() == DEAD){
@@ -173,6 +190,9 @@ void SpriteManager::update(Game *game)
 	while (botIterator != bots.end())
 	{
 		Bot *bot = (*botIterator);
+		if (bot->getFrameCount() >= 100){
+			bot->setCurrentState(DEAD);
+		}
 		if (bot->getCurrentState() == DEAD){
 			bot->getPhysicalProperties()->setVelocity(0, 0);
 			if (bot->getPhysicalProperties()->getSpriteType() == 4 || bot->getPhysicalProperties()->getSpriteType() == 8){
@@ -191,7 +211,7 @@ void SpriteManager::update(Game *game)
 				botIterator++;
 			}
 		}
-		else if (bot->getPhysicalProperties()->getX() <= 0 || bot->getPhysicalProperties()->getX() >= 3200 || bot->getPhysicalProperties()->getY() <= 0 || bot->getPhysicalProperties()->getY() >= 1920){
+		else if (bot->getPhysicalProperties()->getX() <= 0 || bot->getPhysicalProperties()->getX() >= 9600 || bot->getPhysicalProperties()->getY() <= 0 || bot->getPhysicalProperties()->getY() >= 3200){
 			botIterator = bots.erase(botIterator);
 		}
 		else{

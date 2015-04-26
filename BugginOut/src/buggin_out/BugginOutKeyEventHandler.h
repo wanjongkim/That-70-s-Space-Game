@@ -19,8 +19,11 @@ class Game;
 
 class BugginOutKeyEventHandler : public KeyEventHandler
 {
+private:
+	bool spawn;
 public:
-	BugginOutKeyEventHandler()		{}
+	BugginOutKeyEventHandler()		{ spawn = false; }
 	~BugginOutKeyEventHandler()		{}
 	void handleKeyEvents(Game *game);
+	void handleSpawnEvents(Game *game);
 };

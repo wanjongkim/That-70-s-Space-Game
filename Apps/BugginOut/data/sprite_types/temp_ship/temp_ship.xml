@@ -40,53 +40,17 @@
         <image_file id="34" file_name="geoff_MOVE_UP_RIGHT_2.png"/>
         <image_file id="35" file_name="geoff_MOVE_UP_RIGHT_3.png"/>
         <image_file id="36" file_name="geoff_MOVE_UP_RIGHT_4.png"/>
-		<image_file id="37" file_name="geoff_ALT_IDLE_1.png"/>
-		<image_file id="38" file_name="geoff_ALT_IDLE_2.png"/>
-		<image_file id="39" file_name="geoff_ALT_IDLE_3.png"/>
-		<image_file id="40" file_name="geoff_ALT_IDLE_4.png"/>
-        <image_file id="41" file_name="geoff_ALT_MOVE_DOWN_1.png"/>
-        <image_file id="42" file_name="geoff_ALT_MOVE_DOWN_2.png"/>
-        <image_file id="43" file_name="geoff_ALT_MOVE_DOWN_3.png"/>
-        <image_file id="44" file_name="geoff_ALT_MOVE_DOWN_4.png"/>
-        <image_file id="45" file_name="geoff_ALT_MOVE_LEFT_1.png"/>
-        <image_file id="46" file_name="geoff_ALT_MOVE_LEFT_2.png"/>
-        <image_file id="47" file_name="geoff_ALT_MOVE_LEFT_3.png"/>
-        <image_file id="48" file_name="geoff_ALT_MOVE_LEFT_4.png"/>
-        <image_file id="49" file_name="geoff_ALT_MOVE_RIGHT_1.png"/>
-        <image_file id="50" file_name="geoff_ALT_MOVE_RIGHT_2.png"/>
-        <image_file id="51" file_name="geoff_ALT_MOVE_RIGHT_3.png"/>
-        <image_file id="52" file_name="geoff_ALT_MOVE_RIGHT_4.png"/>
-        <image_file id="53" file_name="geoff_ALT_MOVE_UP_1.png"/>
-        <image_file id="54" file_name="geoff_ALT_MOVE_UP_2.png"/>
-        <image_file id="55" file_name="geoff_ALT_MOVE_UP_3.png"/>
-        <image_file id="56" file_name="geoff_ALT_MOVE_UP_4.png"/>
-        <image_file id="57" file_name="geoff_ALT_MOVE_DOWN_LEFT_1.png"/>
-        <image_file id="58" file_name="geoff_ALT_MOVE_DOWN_LEFT_2.png"/>
-        <image_file id="59" file_name="geoff_ALT_MOVE_DOWN_LEFT_3.png"/>
-        <image_file id="60" file_name="geoff_ALT_MOVE_DOWN_LEFT_4.png"/>
-        <image_file id="61" file_name="geoff_ALT_MOVE_UP_LEFT_1.png"/>
-        <image_file id="62" file_name="geoff_ALT_MOVE_UP_LEFT_2.png"/>
-        <image_file id="63" file_name="geoff_ALT_MOVE_UP_LEFT_3.png"/>
-        <image_file id="64" file_name="geoff_ALT_MOVE_UP_LEFT_4.png"/>
-        <image_file id="65" file_name="geoff_ALT_MOVE_DOWN_RIGHT_1.png"/>
-        <image_file id="66" file_name="geoff_ALT_MOVE_DOWN_RIGHT_2.png"/>
-        <image_file id="67" file_name="geoff_ALT_MOVE_DOWN_RIGHT_3.png"/>
-        <image_file id="68" file_name="geoff_ALT_MOVE_DOWN_RIGHT_4.png"/>
-        <image_file id="69" file_name="geoff_ALT_MOVE_UP_RIGHT_1.png"/>
-        <image_file id="70" file_name="geoff_ALT_MOVE_UP_RIGHT_2.png"/>
-        <image_file id="71" file_name="geoff_ALT_MOVE_UP_RIGHT_3.png"/>
-        <image_file id="72" file_name="geoff_ALT_MOVE_UP_RIGHT_4.png"/>
-        <image_file id="73" file_name="geoff_DEAD_1.png"/>
-        <image_file id="74" file_name="geoff_DEAD_2.png"/>
-        <image_file id="75" file_name="geoff_DEAD_3.png"/>
-        <image_file id="76" file_name="geoff_DEAD_4.png"/>
-        <image_file id="77" file_name="geoff_DEAD_5.png"/>
-        <image_file id="78" file_name="geoff_DEAD_6.png"/>
-        <image_file id="79" file_name="geoff_DEAD_7.png"/>
-        <image_file id="80" file_name="geoff_DEAD_8.png"/>
-        <image_file id="81" file_name="geoff_DEAD_9.png"/>
-        <image_file id="82" file_name="geoff_DEAD_10.png"/>
-        <image_file id="83" file_name="geoff_DEAD_11.png"/>
+        <image_file id="37" file_name="geoff_DEAD_1.png"/>
+        <image_file id="38" file_name="geoff_DEAD_2.png"/>
+        <image_file id="39" file_name="geoff_DEAD_3.png"/>
+        <image_file id="40" file_name="geoff_DEAD_4.png"/>
+        <image_file id="41" file_name="geoff_DEAD_5.png"/>
+        <image_file id="42" file_name="geoff_DEAD_6.png"/>
+        <image_file id="43" file_name="geoff_DEAD_7.png"/>
+        <image_file id="44" file_name="geoff_DEAD_8.png"/>
+        <image_file id="45" file_name="geoff_DEAD_9.png"/>
+        <image_file id="46" file_name="geoff_DEAD_10.png"/>
+        <image_file id="47" file_name="geoff_DEAD_11.png"/>
     </images_list>
     <animations_list>
         <animation_state>
@@ -189,118 +153,19 @@
             </animation_sequence>
         </animation_state>
         <animation_state>
-            <state>ALT_IDLE</state>
-            <animation_sequence>
-                <pose image_id="37" duration="2"/>
-                <pose image_id="38" duration="2"/>
-                <pose image_id="39" duration="2"/>
-                <pose image_id="40" duration="2"/>
-                <pose image_id="39" duration="2"/>
-                <pose image_id="38" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_RIGHT</state>
-            <animation_sequence>
-                <pose image_id="49" duration="2"/>
-                <pose image_id="50" duration="2"/>
-                <pose image_id="51" duration="2"/>
-                <pose image_id="52" duration="2"/>
-                <pose image_id="51" duration="2"/>
-                <pose image_id="50" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_UP_RIGHT</state>
-            <animation_sequence>
-                <pose image_id="69" duration="2"/>
-                <pose image_id="70" duration="2"/>
-                <pose image_id="71" duration="2"/>
-                <pose image_id="72" duration="2"/>
-                <pose image_id="71" duration="2"/>
-                <pose image_id="70" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_UP</state>
-            <animation_sequence>
-                <pose image_id="53" duration="2"/>
-                <pose image_id="54" duration="2"/>
-                <pose image_id="55" duration="2"/>
-                <pose image_id="56" duration="2"/>
-                <pose image_id="55" duration="2"/>
-                <pose image_id="54" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_UP_LEFT</state>
-            <animation_sequence>
-                <pose image_id="61" duration="2"/>
-                <pose image_id="62" duration="2"/>
-                <pose image_id="63" duration="2"/>
-                <pose image_id="64" duration="2"/>
-                <pose image_id="63" duration="2"/>
-                <pose image_id="62" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_LEFT</state>
-            <animation_sequence>
-                <pose image_id="45" duration="2"/>
-                <pose image_id="46" duration="2"/>
-                <pose image_id="47" duration="2"/>
-                <pose image_id="48" duration="2"/>
-                <pose image_id="47" duration="2"/>
-                <pose image_id="46" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_DOWN_LEFT</state>
-            <animation_sequence>
-                <pose image_id="57" duration="2"/>
-                <pose image_id="58" duration="2"/>
-                <pose image_id="59" duration="2"/>
-                <pose image_id="60" duration="2"/>
-                <pose image_id="59" duration="2"/>
-                <pose image_id="58" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_DOWN</state>
-            <animation_sequence>
-                <pose image_id="41" duration="2"/>
-                <pose image_id="42" duration="2"/>
-                <pose image_id="43" duration="2"/>
-                <pose image_id="44" duration="2"/>
-                <pose image_id="43" duration="2"/>
-                <pose image_id="42" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
-            <state>ALT_MOVE_DOWN_RIGHT</state>
-            <animation_sequence>
-                <pose image_id="65" duration="2"/>
-                <pose image_id="66" duration="2"/>
-                <pose image_id="67" duration="2"/>
-                <pose image_id="68" duration="2"/>
-                <pose image_id="67" duration="2"/>
-                <pose image_id="66" duration="2"/>
-            </animation_sequence>
-        </animation_state>
-        <animation_state>
             <state>DEAD</state>
             <animation_sequence>
-                <pose image_id="73" duration="3"/>
-                <pose image_id="74" duration="3"/>
-                <pose image_id="75" duration="3"/>
-                <pose image_id="76" duration="3"/>
-                <pose image_id="77" duration="3"/>
-                <pose image_id="78" duration="3"/>
-                <pose image_id="79" duration="3"/>
-                <pose image_id="80" duration="2"/>
-                <pose image_id="81" duration="2"/>
-                <pose image_id="82" duration="2"/>
-                <pose image_id="83" duration="60"/>
+                <pose image_id="37" duration="3"/>
+                <pose image_id="38" duration="3"/>
+                <pose image_id="39" duration="3"/>
+                <pose image_id="40" duration="3"/>
+                <pose image_id="41" duration="3"/>
+                <pose image_id="42" duration="3"/>
+                <pose image_id="43" duration="3"/>
+                <pose image_id="44" duration="2"/>
+                <pose image_id="45" duration="2"/>
+                <pose image_id="46" duration="2"/>
+                <pose image_id="47" duration="60"/>
             </animation_sequence>
         </animation_state>
     </animations_list>  

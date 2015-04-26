@@ -36,6 +36,7 @@
 
 // ANIMATED SPRITE TYPE LOADING
 #include "psti\PoseurSpriteTypesImporter.h"
+#include "Box2D\Box2D.h"
 
 /*
 	loadGame - This method loads the setup game data into the game and
@@ -108,6 +109,7 @@ void BugginOutDataLoader::loadGame(Game *game, wstring gameInitFile)
 
 	// INIT THE VIEWPORT TOO
 	initViewport(game->getGUI(), properties);	
+	game->getGUI()->getViewport()->setViewportX(3776);
 
 	// WE DON'T NEED THE PROPERTIES MAP ANYMORE, THE GAME IS ALL LOADED
 	delete properties;
@@ -196,11 +198,28 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	player->setOnTileLastFrame(false);
 	player->affixPlayerAABBBoundingVolume();
 
-	AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
+	b2World* bWorld = game->getGSM()->getb2World();
+	b2BodyDef playerBodyDef;
+	playerBodyDef.type = b2_dynamicBody;
+	playerBodyDef.position.Set(69, 48.4375);
+	playerBodyDef.angle = 0;
+	b2Body* dynamicBody = bWorld->CreateBody(&playerBodyDef);
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(1, 1);
+	
+	b2FixtureDef boxFixtureDef;
+	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.density = 1;
+	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetUserData(player);
+	player->setBody(dynamicBody);
+
+	/*AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
 	AnimatedSpriteType *shootingRightSpriteType = spriteManager->getSpriteType(2);
 	AnimatedSpriteType *shootingUpSpriteType = spriteManager->getSpriteType(3);
 	AnimatedSpriteType *shootingDownSpriteType = spriteManager->getSpriteType(5);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
+	makeShooterBot(game, shootingUpSpriteType, 3, 4288, 1408, 30, 50, 2); */
+	/*makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
 	makeShooterBot(game, shootingRightSpriteType, 2, 30, 768, 30, 70, 3);
 	makeShooterBot(game, shootingUpSpriteType, 3, 1152, 800, 30, 50, 2);
 	makeShooterBot(game, shootingLeftSpriteType, 1, 3136, 128, 30, 50, 3);
@@ -210,7 +229,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
     makeShooterBot(game, shootingLeftSpriteType, 1, 2304, 448, 30, 10, 3);
 	makeShooterBot(game, shootingRightSpriteType, 2, 2370, 400, 30, 12, 3);
 	makeShooterBot(game, shootingUpSpriteType, 3, 2304, 1856, 30, 40, 2);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 2880, 1280, 30, 10, 1);
+	makeShooterBot(game, shootingLeftSpriteType, 1, 2880, 1280, 30, 10, 1);*/
 
 
 }

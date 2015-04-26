@@ -26,7 +26,7 @@
 #include "sssf\platforms\Windows\WindowsTimer.h"
 #include "sssf\gsm\ai\bots\BasicBulletBot.h"
 #include "sssf\audio\AudioManager.h"
-
+#include "Box2D\Box2D.h"
 /*
 	handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
 	gets called and it can respond to key interactions in any custom way. Ask the GameInput class for
@@ -64,25 +64,37 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				player->getPhysicalProperties()->swapFireDir();
 			}
 
-			if (input->isKeyDown(A_KEY) && pp->getX() >= 0)
+			if (input->isKeyDown(A_KEY))
 			{
-				vX = -PLAYER_SPEED;
-				player->setCurrentState(MOVE_LEFT);
+				if (pp->getX() >= viewport->getViewportX() + 265){
+					vX = -PLAYER_SPEED;
+					player->setCurrentState(MOVE_LEFT);
+				}
+				else vX = 0;
 			}
-			if (input->isKeyDown(D_KEY) && pp->getX() <= 3200)
+			if (input->isKeyDown(D_KEY))
 			{
-				vX = PLAYER_SPEED;
-				player->setCurrentState(MOVE_RIGHT);
+				if (pp->getX() <= viewport->getViewportX() + 1024){
+					vX = PLAYER_SPEED;
+					player->setCurrentState(MOVE_RIGHT);
+				}
+				else vX = 0;
 			}
-			if (input->isKeyDown(S_KEY) && pp->getY() <= 1920)
+			if (input->isKeyDown(S_KEY))
 			{
-				vY = PLAYER_SPEED;
-				player->setCurrentState(MOVE_DOWN);
+				if (pp->getY() <= viewport->getViewportY() + 520){
+					vY = -PLAYER_SPEED;
+					player->setCurrentState(MOVE_DOWN);
+				}
+				else vY = 0;
 			}
-			if (input->isKeyDown(W_KEY) && pp->getY() >= 0)
+			if (input->isKeyDown(W_KEY))
 			{
-				vY = -PLAYER_SPEED;
-				player->setCurrentState(MOVE_UP);
+				if (pp->getY() >= viewport->getViewportY() + 50){
+					vY = PLAYER_SPEED;
+					player->setCurrentState(MOVE_UP);
+				}
+				else vY = 0;
 			}
 			if (input->isKeyDownForFirstTime(G_KEY))
 			{
@@ -108,7 +120,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			}
 
 			// NOW SET THE ACTUAL PLAYER VELOCITY
-			pp->setVelocity(vX, vY);
+			player->getBody()->SetLinearVelocity(b2Vec2(vX + viewport->getVx(), vY - viewport->getVy()));
 
 
 			//PLAYER SHOOTING
@@ -129,6 +141,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX() + 46) / 64, (3200 - pp->getY()) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(0, PLAYER_BULLET_SPEED));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -147,6 +175,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX()) / 64, (3200 - (pp->getY() + 50)) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(-PLAYER_BULLET_SPEED, 0));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -165,6 +209,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX() + 46) / 64, (3200 - (pp->getY() + 110)) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(0, -PLAYER_BULLET_SPEED));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -183,6 +243,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX() + 110) / 64, (3200 - (pp->getY() + 50)) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(PLAYER_BULLET_SPEED, 0));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -203,6 +279,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX() + 70) / 64, (3200 - (pp->getY() + 20)) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -221,6 +313,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX() + 10) / 64, (3200 - (pp->getY() + 20)) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(-PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -239,6 +347,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX() + 20) / 64, (3200 - (pp->getY() + 90)) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(-PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -257,6 +381,22 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setCurrentState(IDLE);
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
+					b2World* bWorld = game->getGSM()->getb2World();
+					b2BodyDef botBodyDef;
+					botBodyDef.type = b2_dynamicBody;
+					botBodyDef.position.Set((pp->getX() + 70) / 64, (3200 - (pp->getY() + 90)) / 64);
+					botBodyDef.angle = 0;
+					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+					b2PolygonShape boxShape;
+					boxShape.SetAsBox(.125, .125);
+					b2FixtureDef boxFixtureDef;
+					boxFixtureDef.shape = &boxShape;
+					boxFixtureDef.density = 1;
+					dynamicBody->CreateFixture(&boxFixtureDef);
+					dynamicBody->SetUserData(bot);
+					bot->setBody(dynamicBody);
+					dynamicBody->SetLinearDamping(0);
+					dynamicBody->SetLinearVelocity(b2Vec2(PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED));
 					player->getPhysicalProperties()->setShot(30);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
@@ -290,7 +430,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 			viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
 			viewportMoved = true;
 		}
-		if (!input->isKeyDown(I_KEY) && !input->isKeyDown(K_KEY) && !input->isKeyDown(J_KEY) && !input->isKeyDown(L_KEY)){
+		/*if (!input->isKeyDown(I_KEY) && !input->isKeyDown(K_KEY) && !input->isKeyDown(J_KEY) && !input->isKeyDown(L_KEY)){
 			playerDistX = (viewport->getViewportX() + viewport->getViewportWidth() / 2) - (player->getPhysicalProperties()->getX());
 			playerDistY = (viewport->getViewportY() + viewport->getViewportHeight() / 2.2) - (player->getPhysicalProperties()->getY());
 			if (playerDistX > 30){
@@ -314,7 +454,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 				viewportVx = player->getPhysicalProperties()->getVelocityX();
 			}
 			viewportMoved = true;
-		}
+		}*/
 		Viewport *viewport = game->getGUI()->getViewport();
 		if (viewportMoved)
 			viewport->moveViewport((int)floor(viewportVx+0.5f), (int)floor(viewportVy+0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
@@ -347,4 +487,21 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 	// THIS SLOWS DOWN OUR GAME LOOP, BUT WILL NOT GO BELOW 5 FRAMES PER SECOND
 	else if (input->isKeyDown(VK_END) && (fps > MIN_FPS))
 		timer->setTargetFPS(fps - FPS_INC);
-}
+
+	handleSpawnEvents(game);
+	}
+	
+		// USES THE CURRENT LEVEL AND THE VIEWPORT POSITION TO SPAWN ENEMIES IF NECESSARY
+		void BugginOutKeyEventHandler::handleSpawnEvents(Game *game){
+		if (game->getGSM()->getWorld()->getLevel() == 1){
+			if (spawn){
+				
+					
+			}
+			if (!spawn){
+				
+					
+			}
+			
+		}
+	}

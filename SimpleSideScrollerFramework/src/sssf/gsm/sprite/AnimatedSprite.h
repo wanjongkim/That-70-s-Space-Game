@@ -1,12 +1,12 @@
-/*	
-	Author: Richard McKenna
-			Stony Brook University
-			Computer Science Department
+/*
+Author: Richard McKenna
+Stony Brook University
+Computer Science Department
 
-	AnimatedSprite.h
+AnimatedSprite.h
 
-	This class represents a sprite that can can
-	be used to animate a game character or object.
+This class represents a sprite that can can
+be used to animate a game character or object.
 */
 
 #pragma once
@@ -15,6 +15,7 @@
 #include "sssf\gsm\physics\PhysicalProperties.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\gui\Viewport.h"
+#include "Box2D\Box2D.h"
 
 class AnimatedSprite : public CollidableObject
 {
@@ -39,18 +40,27 @@ protected:
 	// USED TO ITERATE THROUGH THE CURRENT ANIMATION SEQUENCE
 	unsigned int animationCounter;
 
+	b2Body *spriteBody;
+
+
 public:
 	// INLINED ACCESSOR METHODS
-	int					getAlpha()			{ return alpha;				}
-	wstring				getCurrentState()	{ return currentState;		}
-	unsigned int		getFrameIndex()		{ return frameIndex;		}
-	AnimatedSpriteType*	getSpriteType()		{ return spriteType;		}
+	int					getAlpha()			{ return alpha; }
+	wstring				getCurrentState()	{ return currentState; }
+	unsigned int		getFrameIndex()		{ return frameIndex; }
+	AnimatedSpriteType*	getSpriteType()		{ return spriteType; }
+	b2Body*				getBody()			{ return spriteBody; }
 
 	// INLINED MUTATOR METHODS
 	void setAlpha(int initAlpha)
-	{	alpha = initAlpha;						}
+	{
+		alpha = initAlpha;
+	}
 	void setSpriteType(AnimatedSpriteType *initSpriteType)
-	{	spriteType = initSpriteType;			}
+	{
+		spriteType = initSpriteType;
+	}
+	void setBody(b2Body* initBody){ spriteBody = initBody; }
 
 	// METHODS DEFINED IN AnimatedSprite.cpp
 	AnimatedSprite();

@@ -12,7 +12,7 @@ creating these types of bots.
 */
 BasicBulletBot::BasicBulletBot()
 {
-	
+	frameCounter = 0;
 }
 
 /*
@@ -38,6 +38,6 @@ frame, depending on the value of cyclesRemainingBeforeThinking.
 */
 void BasicBulletBot::think(Game *game)
 {
-	
 
+	frameCounter++;
 }

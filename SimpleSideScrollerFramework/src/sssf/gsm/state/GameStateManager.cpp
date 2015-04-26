@@ -243,8 +243,13 @@ void GameStateManager::update(Game *game)
 {
 	spriteManager->update(game);
 	world.update(game);
-	if (physics.isActivated() || physics.isActivatedForSingleUpdate())
+	float32 timeStep = 1 / 60.0;
+	int32 velocityIterations = 8;
+	int32 positionIterations = 3;
+
+	bWorld->Step(timeStep, velocityIterations, positionIterations);
+	/*if (physics.isActivated() || physics.isActivatedForSingleUpdate())
 	{
-		physics.update(game);
-	}
+	physics.update(game);
+	}*/
 }

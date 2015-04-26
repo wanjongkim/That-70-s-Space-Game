@@ -11,7 +11,7 @@ class BasicBulletBot : public Bot
 private:
 	unsigned int initX;
 	unsigned int initY;
-
+	int counter;
 	
 
 public:

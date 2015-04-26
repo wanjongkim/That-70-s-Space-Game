@@ -34,6 +34,23 @@ private:
 	// REQUIRE SCROLLING TO SEE IT.
 	int worldWidth;
 	int worldHeight;
+	//KEEP TRACK OF WHICH LEVEL WE'RE ON
+	int levelNum;
+
+	// KEEP TRACK OF VIEWPORT MOVEMENTS, SINCE IT MUST AUTOSCROLL
+	// NOTE THAT THIS IS DONE BASED ON POSITION, TO AVOID PROBLEMS WITH A TIMER
+	bool move1;
+	bool move2;
+	bool move3;
+	bool move4;
+	bool move5;
+	bool move6;
+	bool move7;
+	bool move8;
+	bool move9;
+	bool move10;
+	bool move11;
+	bool stop;
 
 	// THESE ARE THE BACKGROUND LAYERS
 	vector<WorldLayer*> *layers;
@@ -43,13 +60,16 @@ public:
 	vector<WorldLayer*>*	getLayers()	{ return layers;				}
 	int						getNumLayers() { return layers->size(); }
 	int						getWorldHeight()	{ return worldHeight;			}
-	int						getWorldWidth()		{ return worldWidth;			}
+	int						getWorldWidth()		{ return worldWidth; }
+	int						getLevel()			{ return levelNum; }
 
 	// INLINED MUTATOR METHODS
 	void setWorldHeight(int initWorldHeight)
 	{ worldHeight = initWorldHeight;		}
 	void setWorldWidth(int initWorldWidth)
-	{ worldWidth = initWorldWidth;			}
+	{ worldWidth = initWorldWidth;}
+	void setLevel(int initLevel){
+		levelNum = initLevel;}
 
 	// METHODS DEFINED in GameStateManager.cpp
 	World();
