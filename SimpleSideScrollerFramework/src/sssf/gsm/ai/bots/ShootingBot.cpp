@@ -93,6 +93,7 @@ void ShootingBot::think(Game *game)
 		float playerDist = sqrt((this->getPhysicalProperties()->getX() - player->getPhysicalProperties()->getX())*(this->getPhysicalProperties()->getX() - player->getPhysicalProperties()->getX()) + (this->getPhysicalProperties()->getY() - player->getPhysicalProperties()->getY()) * (this->getPhysicalProperties()->getY() - player->getPhysicalProperties()->getY()));
 		if (playerDist < 1300 && player->getCurrentState() != DEAD){
 			this->shootAtPoint(player->getPhysicalProperties()->getX()+60, player->getPhysicalProperties()->getY()+60, game);
+			game->getGSM()->getAudioManager()->playSound("enemyFire");
 			actualCyclesBeforeShoot = cyclesBeforeShoot;
 		}
 	}

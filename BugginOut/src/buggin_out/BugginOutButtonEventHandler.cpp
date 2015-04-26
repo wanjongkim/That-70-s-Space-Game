@@ -35,12 +35,16 @@ void BugginOutButtonEventHandler::handleButtonEvents(	Game *game,
 	else if (command.compare(W_START_COMMAND) == 0)
 	{
 		game->setCurrentLevelFileName(W_LEVEL_1_NAME);
+		game->getGSM()->getAudioManager()->stopSound(CUE_TITLE_MUSIC);
 		game->startGame();
 	}
 	// THE USER PRESSED THE Quit BUTTON ON THE IN-GAME MENU,
 	// SO LET'S UNLOAD THE LEVEL AND RETURN TO THE MAIN MENU
 	else if (command.compare(W_QUIT_COMMAND) == 0)
 	{
+		// Stop the ingame music
+
+		game->getGSM()->getAudioManager()->playSound(CUE_TITLE_MUSIC);
 		game->quitGame();
 	}
 	// THE USER PRESSED THE Help BUTTON ON THE MAIN MENU,

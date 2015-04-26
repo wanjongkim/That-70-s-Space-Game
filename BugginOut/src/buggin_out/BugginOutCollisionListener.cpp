@@ -19,17 +19,21 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 		if (collision->isCollisionWithTile())
 		{
 			if (col1->getPhysicalProperties()->getSpriteType() == 4 || col1->getPhysicalProperties()->getSpriteType() == 8){
+				game->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 				an1->setCurrentState(DEAD);
 			}
 			else if (col2->getPhysicalProperties()->getSpriteType() == 4 || col2->getPhysicalProperties()->getSpriteType() == 8){
+				game->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 				an2->setCurrentState(DEAD);
 			}
 
 
 			if (col1->getPhysicalProperties()->getSpriteType() == 0 || col1->getPhysicalProperties()->getSpriteType() == 1){
+				game->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 				an1->setCurrentState(DEAD);
 			}
 			else if (col2->getPhysicalProperties()->getSpriteType() == 0 || col2->getPhysicalProperties()->getSpriteType() == 1){
+				game->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 				an2->setCurrentState(DEAD);
 			}
 
@@ -37,6 +41,7 @@ void BugginOutCollisionListener::respondToCollision(Game *game, Collision *colli
 		else
 		{
 			if ((col1->getPhysicalProperties()->getSpriteType() == 8 && col2->getPhysicalProperties()->getSpriteType() == 0) || (col1->getPhysicalProperties()->getSpriteType() == 0 && col2->getPhysicalProperties()->getSpriteType() == 8)){
+				game->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 				an1->setCurrentState(DEAD);
 				an2->setCurrentState(DEAD);
 			}

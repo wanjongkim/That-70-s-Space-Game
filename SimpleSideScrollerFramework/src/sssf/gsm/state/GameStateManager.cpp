@@ -26,8 +26,7 @@
 GameStateManager::GameStateManager()	
 {
 	spriteManager = new SpriteManager();
-	audioManager = new AudioManager();
-	audioManager->initialize();
+	audioManager = new AudioManager(L"data/audio/Sounds.xgs");
 	b2Vec2* vec = new b2Vec2(0.0, 0.0);
 	bWorld = new b2World(*vec);
 	currentGameState = GS_SPLASH_SCREEN;

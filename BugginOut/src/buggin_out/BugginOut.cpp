@@ -72,9 +72,18 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	bugginOutGame->setDataLoader(bugginOutDataLoader);
 	bugginOutDataLoader->loadGame(bugginOutGame, W_INIT_FILE);
 	
-	bugginOutGame->getGSM()->getAudioManager()->loadAudio(W_WAVE_BANK, W_STREAMING_WAVE_BANK, W_SOUND_BANK);
-	bugginOutGame->getGSM()->getAudioManager()->loadCue(CUE_ZAP); 
-	bugginOutGame->getGSM()->getAudioManager()->loadCue(CUE_SONG_1);
+	AudioManager* audioManager = bugginOutGame->getGSM()->getAudioManager();
+	audioManager->loadAudio(W_WAVE_BANK, W_STREAMING_WAVE_BANK, W_SOUND_BANK);
+	audioManager->loadCue(CUE_ZAP);
+	audioManager->loadCue(CUE_TITLE_MUSIC);
+	audioManager->loadCue(CUE_SONG_1);
+	audioManager->loadCue(CUE_SONG_2);
+	audioManager->loadCue(CUE_PLAYER_FIRE);
+	audioManager->loadCue(CUE_PLAYER_EXPLOSION);
+	audioManager->loadCue(CUE_BULLET_EXPLOSION);
+	audioManager->loadCue(CUE_ENEMY_FIRE);
+	audioManager->playSound(CUE_TITLE_MUSIC);
+
 
 	// WHAT WE SHOULD BE DOING HERE IS LOADING THE GAME DATA FROM FILES. THIS
 	// MEANS THE GUIS THEMSELVES AS WELL AS THE LEVELS. THAT WILL BE LEFT

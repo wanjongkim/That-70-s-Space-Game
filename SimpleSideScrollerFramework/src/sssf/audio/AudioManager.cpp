@@ -1,6 +1,9 @@
 #include "AudioManager.h"
 
-AudioManager::AudioManager() {
+AudioManager::AudioManager(wstring settingsFile) {
+	musicVolume = 1.0;
+	soundVolume = 1.0;
+	initialize(settingsFile);
 }
 
 /*
@@ -34,7 +37,7 @@ AudioManager::~AudioManager() {
 /*
 	Initialize the XACT audio engine
 */
-bool AudioManager::initialize() {
+bool AudioManager::initialize(wstring settingsFile) {
 	// Initialize the critical section, used for preventing race conditions
 	InitializeCriticalSection(&cs);
 
@@ -48,12 +51,50 @@ bool AudioManager::initialize() {
 	if (audioEngine == 0) return false;
 
 	// If loading a global settings file, do it here
+	void* globalSettingsData = nullptr;
+	HANDLE file = CreateFile(settingsFile.c_str(), GENERIC_READ, FILE_SHARE_READ, 
+			NULL, OPEN_EXISTING, 0, NULL);
+	if (!file) return false;
+
+	unsigned int fileSize = 0;
+	fileSize = GetFileSize(file, NULL);
+	if (fileSize == INVALID_FILE_SIZE) {
+		CloseHandle(file);
+		if (globalSettingsData) CoTaskMemFree(globalSettingsData);
+		globalSettingsData = nullptr;
+		fileSize = 0;
+		return false;
+	}
+
+	globalSettingsData = CoTaskMemAlloc(fileSize);
+	if (!globalSettingsData) {
+		CloseHandle(file);
+		if (globalSettingsData) CoTaskMemFree(globalSettingsData);
+		globalSettingsData = nullptr;
+		fileSize = 0;
+		return false;
+	}
+
+	unsigned long bytesRead;
+	if (ReadFile(file, globalSettingsData, fileSize, &bytesRead, NULL) == 0) {
+		CloseHandle(file);
+		if (globalSettingsData) CoTaskMemFree(globalSettingsData);
+		globalSettingsData = nullptr;
+		fileSize = 0;
+		return false;
+	}
+
+	CloseHandle(file);
+
 
 	// Set the runtime parameters
 	XACT_RUNTIME_PARAMETERS params = { 0 };
+	params.pGlobalSettingsBuffer = globalSettingsData;
+	params.globalSettingsBufferSize = fileSize;
+	params.globalSettingsFlags = XACT_FLAG_GLOBAL_SETTINGS_MANAGEDATA;
+	//params.fnNotificationCallback = &AudioManager::notificationCallback;
 	params.lookAheadTime = XACT_ENGINE_LOOKAHEAD_DEFAULT;
 
-	//params.fnNotificationCallback = &AudioManager::notificationCallback;
 
 	// Initialize the audio engine with the parameters
 	if (FAILED(audioEngine->Initialize(&params))) return false;
@@ -82,7 +123,6 @@ bool AudioManager::initialize() {
 	desc.type = XACTNOTIFICATIONTYPE_CUEPREPARED;
 	desc.cueIndex = XACTINDEX_INVALID;
 	audioEngine->RegisterNotification(&desc);
-
 }
 
 /*
@@ -98,6 +138,8 @@ bool AudioManager::loadAudio(wstring waveBankFile, wstring streamingWaveBankFile
 	// Get the sound categories
 	musicCategory = audioEngine->GetCategory("Music");
 	soundCategory = audioEngine->GetCategory("Sound");
+	audioEngine->SetVolume(musicCategory, 1.0f);
+	audioEngine->SetVolume(soundCategory, 1.0f);
 	return true;
 }
 
@@ -155,7 +197,7 @@ bool AudioManager::loadStreamingWaveBank(wstring streamingWaveBankFile) {
 	params.packetSize = 64;
 	if (FAILED(audioEngine->CreateStreamingWaveBank(&params, &streamingWaveBank))) return false;
 
-
+	return true;
 }
 
 /*

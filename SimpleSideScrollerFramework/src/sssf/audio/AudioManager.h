@@ -37,9 +37,8 @@ private:
 	string currentSong;
 
 public:
-	AudioManager();
+	AudioManager(wstring settingsFile);
 	~AudioManager();
-	bool initialize();
 	void changeMusicVolume(float delta);
 	bool loadAudio(wstring waveBankFile, wstring streamingWaveBankFile, wstring soundBankFile);
 	void loadCue(string cue);
@@ -48,9 +47,11 @@ public:
 
 	// Inlined methods
 	void playSound(string cue)	{ soundBank->Play(cues.at(cue), 0, 0, NULL); }
+	void stopSound(string cue)	{ soundBank->Stop(cues.at(cue), 0); }
 
 private:
 	// Private helper methods
+	bool initialize(wstring settingsFile);
 	bool loadWaveBank(wstring waveBankFile);
 	bool loadStreamingWaveBank(wstring streamingWaveBankFile);
 	bool loadSoundBank(wstring waveBankFile);

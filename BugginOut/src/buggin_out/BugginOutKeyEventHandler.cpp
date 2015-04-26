@@ -130,7 +130,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(LEFT_KEY) && shotTime == 0)
 				{
@@ -148,7 +148,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(DOWN_KEY) && shotTime == 0)
 				{
@@ -166,7 +166,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(RIGHT_KEY) && shotTime == 0)
 				{
@@ -184,7 +184,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 			}
 			else{
@@ -204,7 +204,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(LEFT_KEY) && shotTime == 0)
 				{
@@ -222,7 +222,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(DOWN_KEY) && shotTime == 0)
 				{
@@ -240,7 +240,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(RIGHT_KEY) && shotTime == 0)
 				{
@@ -258,7 +258,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					sm->addBot(bot);
 					bot->affixTightAABBBoundingVolume();
 					player->getPhysicalProperties()->setShot(30);
-					am->playSound("zap");
+					am->playSound(CUE_PLAYER_FIRE);
 				}
 			}
 			if (shotTime > 0){
