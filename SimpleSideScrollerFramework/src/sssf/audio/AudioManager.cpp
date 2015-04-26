@@ -139,7 +139,7 @@ bool AudioManager::loadAudio(wstring waveBankFile, wstring streamingWaveBankFile
 	musicCategory = audioEngine->GetCategory("Music");
 	soundCategory = audioEngine->GetCategory("Sound");
 	audioEngine->SetVolume(musicCategory, 1.0f);
-	audioEngine->SetVolume(soundCategory, 1.0f);
+	audioEngine->SetVolume(soundCategory, 0.5f);
 	return true;
 }
 

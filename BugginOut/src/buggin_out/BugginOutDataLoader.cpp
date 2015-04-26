@@ -214,11 +214,11 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	dynamicBody->SetUserData(player);
 	player->setBody(dynamicBody);
 
-	/*AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
+	AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
 	AnimatedSpriteType *shootingRightSpriteType = spriteManager->getSpriteType(2);
 	AnimatedSpriteType *shootingUpSpriteType = spriteManager->getSpriteType(3);
 	AnimatedSpriteType *shootingDownSpriteType = spriteManager->getSpriteType(5);
-	makeShooterBot(game, shootingUpSpriteType, 3, 4288, 1408, 30, 50, 2); */
+	makeShooterBot(game, shootingUpSpriteType, 3, 4416, 1000, 30, 50, 2); 
 	/*makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
 	makeShooterBot(game, shootingRightSpriteType, 2, 30, 768, 30, 70, 3);
 	makeShooterBot(game, shootingUpSpriteType, 3, 1152, 800, 30, 50, 2);
@@ -250,6 +250,22 @@ void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootin
 	bot->setAlpha(255);
 	spriteManager->addBot(bot);
 	bot->affixTightAABBBoundingVolume();
+	b2World* bWorld = game->getGSM()->getb2World();
+	b2BodyDef playerBodyDef;
+	playerBodyDef.type = b2_dynamicBody;
+	playerBodyDef.position.Set(initX / 64, (3200 - initY) / 64);
+	playerBodyDef.angle = 0;
+	b2Body* dynamicBody = bWorld->CreateBody(&playerBodyDef);
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(.5, .5);
+
+	b2FixtureDef boxFixtureDef;
+	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.density = 1;
+	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetUserData(bot);
+	bot->setBody(dynamicBody);
+
 }
 
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)

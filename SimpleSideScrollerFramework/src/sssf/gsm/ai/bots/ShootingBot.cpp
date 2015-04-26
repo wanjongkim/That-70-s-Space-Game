@@ -50,17 +50,35 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 	bulletProps->setSpriteType(8);
 	bot->setSpriteType(enemyBulletType);
 	bot->setAlpha(255);
+	b2World* bWorld = game->getGSM()->getb2World();
+	b2BodyDef botBodyDef;
+	botBodyDef.type = b2_dynamicBody;
+	botBodyDef.position.Set((this->getPhysicalProperties()->getX()) / 64, (3200 - this->getPhysicalProperties()->getY() - 30) / 64);
+	botBodyDef.angle = 0;
+	b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(.125, .125);
+	b2FixtureDef boxFixtureDef;
+	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.density = 1;
+	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetUserData(bot);
+	bot->setBody(dynamicBody);
+	dynamicBody->SetLinearDamping(0);
 	bot->setCurrentState(IDLE);
 	if (this->getPhysicalProperties()->getX() > x){
 		if (this->getPhysicalProperties()->getY() > y){
 			float angle = 90 + ((180 / PI) * atan((this->getPhysicalProperties()->getX() - x) / (this->getPhysicalProperties()->getY() - y)));
 			bulletProps->setVelocity(20 * cos(angle * (PI / 180)), -20 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
+
 		}
 		else{
 			float angle = 180 + (90 - ((180 / PI) * atan((this->getPhysicalProperties()->getX() - x) / (y - this->getPhysicalProperties()->getY()))));
 			bulletProps->setVelocity(20 * cos(angle * (PI / 180)), -20 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
 		}
@@ -69,12 +87,14 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 		if (this->getPhysicalProperties()->getY() > y){
 			float angle = 90 - ((180 / PI) * atan((x - this->getPhysicalProperties()->getX()) / (this->getPhysicalProperties()->getY() - y)));
 			bulletProps->setVelocity(20 * cos(angle * (PI / 180)), -20 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
 		}
 		else{
 			float angle = 270 + ((180 / PI) * atan((x - this->getPhysicalProperties()->getX()) / (y - this->getPhysicalProperties()->getY())));
 			bulletProps->setVelocity(20 * cos(angle * (PI / 180)),- 20 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
 		}
@@ -110,23 +130,39 @@ void ShootingBot::think(Game *game)
 	switch (moveDirection){
 	case 1:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(0.0f, -12.0f);
+		this->getBody()->SetLinearVelocity(b2Vec2(0, -12));
 		}
-		   else this->getPhysicalProperties()->setVelocity(0.0f, 12.0f);
+		   else {
+			   this->getPhysicalProperties()->setVelocity(0.0f, 12.0f);
+			   this->getBody()->SetLinearVelocity(b2Vec2(0, 12));
+		   }
 		   break;
 	case 2:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
+		this->getBody()->SetLinearVelocity(b2Vec2(12, 0));
 	}
-		   else this->getPhysicalProperties()->setVelocity(-12.0f, 0.0f);
+		   else {
+			   this->getPhysicalProperties()->setVelocity(-12.0f, 0.0f);
+			   this->getBody()->SetLinearVelocity(b2Vec2(-12, 0));
+		   }
 		   break;
 	case 3:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(0.0f, 12.0f);
+		this->getBody()->SetLinearVelocity(b2Vec2(0, 12));
 	}
-		   else this->getPhysicalProperties()->setVelocity(0.0f, -12.0f);
+		   else {
+			   this->getPhysicalProperties()->setVelocity(0.0f, -12.0f);
+			   this->getBody()->SetLinearVelocity(b2Vec2(0, -12));
+		   }
 		   break;
 	case 4:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(-12.0f, 0.0f);
+		this->getBody()->SetLinearVelocity(b2Vec2(-12, 0));
 	}
-		   else this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
+		   else {
+			   this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
+			   this->getBody()->SetLinearVelocity(b2Vec2(12, 0));
+		   }
 		   break;
 	}
 
