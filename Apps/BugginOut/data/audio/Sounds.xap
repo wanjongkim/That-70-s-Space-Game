@@ -16,8 +16,8 @@ Global Settings
     Header File = Sounds.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 4275908483;
-    Last Modified High = 30441420;
+    Last Modified Low = 270557316;
+    Last Modified High = 30441573;
 
     Category
     {
@@ -251,8 +251,12 @@ Wave Bank
     Windows Bank Path Edited = 1;
     Seek Tables = 1;
     Compression Preset Name = <none>;
-    Bank Last Revised Low = 3798657731;
-    Bank Last Revised High = 30441428;
+    Xbox Bank Last Modified Low = 0;
+    Xbox Bank Last Modified High = 0;
+    PC Bank Last Modified Low = 270597287;
+    PC Bank Last Modified High = 30441573;
+    Bank Last Revised Low = 270587285;
+    Bank Last Revised High = 30441573;
 
     Wave
     {
@@ -272,8 +276,8 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 134233124;
-            Last Modified High = 30440387;
+            Last Modified Low = 1325703809;
+            Last Modified High = 30441567;
         }
     }
 
@@ -295,8 +299,8 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 2547263687;
-            Last Modified High = 30441394;
+            Last Modified Low = 1321085994;
+            Last Modified High = 30441567;
         }
     }
 
@@ -318,8 +322,8 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 994258702;
-            Last Modified High = 30441394;
+            Last Modified Low = 1321265873;
+            Last Modified High = 30441567;
         }
     }
 
@@ -337,12 +341,12 @@ Wave Bank
             Sampling Rate = 44100;
             Bits Per Sample = 1;
             Play Region Offset = 44;
-            Play Region Length = 2236392;
+            Play Region Length = 2236396;
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 1728239544;
-            Last Modified High = 30441421;
+            Last Modified Low = 4129831003;
+            Last Modified High = 30441572;
         }
     }
 
@@ -360,12 +364,12 @@ Wave Bank
             Sampling Rate = 44100;
             Bits Per Sample = 1;
             Play Region Offset = 44;
-            Play Region Length = 5651568;
+            Play Region Length = 5653188;
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 1729809948;
-            Last Modified High = 30441421;
+            Last Modified Low = 4132851776;
+            Last Modified High = 30441572;
         }
     }
 
@@ -387,8 +391,8 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3629601815;
-            Last Modified High = 30441426;
+            Last Modified Low = 1321175978;
+            Last Modified High = 30441567;
         }
     }
 
@@ -410,8 +414,8 @@ Wave Bank
             Loop Region Offset = 0;
             Loop Region Length = 0;
             File Type = 1;
-            Last Modified Low = 3056983984;
-            Last Modified High = 30441427;
+            Last Modified Low = 1320985929;
+            Last Modified High = 30441567;
         }
     }
 }
@@ -426,6 +430,10 @@ Wave Bank
     Streaming = 1;
     Seek Tables = 1;
     Compression Preset Name = <none>;
+    Xbox Bank Last Modified Low = 0;
+    Xbox Bank Last Modified High = 0;
+    PC Bank Last Modified Low = 0;
+    PC Bank Last Modified High = 0;
     Header Last Modified Low = 0;
     Header Last Modified High = 0;
     Bank Last Revised Low = 3831607491;
@@ -439,6 +447,8 @@ Sound Bank
     Windows File = SoundBank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 1;
+    Bank Last Modified Low = 270707328;
+    Bank Last Modified High = 30441573;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 

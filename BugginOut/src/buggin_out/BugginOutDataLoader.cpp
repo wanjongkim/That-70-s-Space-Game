@@ -13,6 +13,8 @@
 #include "sssf\gsm\ai\bots\RandomJumpingBot.h"
 #include "sssf\gsm\ai\bots\BasicBulletBot.h"
 #include "sssf\gsm\ai\bots\ShootingBot.h"
+#include "sssf\gsm\ai\bots\NoAimBot.h"
+#include "sssf\gsm\ai\bots\HomingBot.h"
 #include "sssf\gsm\state\GameState.h"
 #include "sssf\gsm\world\TiledLayer.h"
 #include "sssf\gui\Cursor.h"
@@ -218,7 +220,11 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *shootingRightSpriteType = spriteManager->getSpriteType(2);
 	AnimatedSpriteType *shootingUpSpriteType = spriteManager->getSpriteType(3);
 	AnimatedSpriteType *shootingDownSpriteType = spriteManager->getSpriteType(5);
-	makeShooterBot(game, shootingUpSpriteType, 3, 4416, 1000, 30, 50, 2); 
+	//makeShooterBot(game, shootingUpSpriteType, 3, 4416, 1000, 30, 50, 2);
+	//makeNoAimBot(game, shootingUpSpriteType, 3, 4416, 1000, 30, 1);
+	makeHomingBot(game, shootingUpSpriteType, 3, 4416, 1000);
+
+
 	/*makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
 	makeShooterBot(game, shootingRightSpriteType, 2, 30, 768, 30, 70, 3);
 	makeShooterBot(game, shootingUpSpriteType, 3, 1152, 800, 30, 50, 2);
@@ -246,6 +252,73 @@ void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootin
 	pp->setPosition(initX, initY);
 	pp->setSpriteType(spriteType);
 	bot->setSpriteType(shootingBotType);
+	bot->setCurrentState(IDLE);
+	bot->setAlpha(255);
+	spriteManager->addBot(bot);
+	bot->affixTightAABBBoundingVolume();
+	b2World* bWorld = game->getGSM()->getb2World();
+	b2BodyDef playerBodyDef;
+	playerBodyDef.type = b2_dynamicBody;
+	playerBodyDef.position.Set(initX / 64, (3200 - initY) / 64);
+	playerBodyDef.angle = 0;
+	b2Body* dynamicBody = bWorld->CreateBody(&playerBodyDef);
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(.5, .5);
+
+	b2FixtureDef boxFixtureDef;
+	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.density = 1;
+	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetUserData(bot);
+	bot->setBody(dynamicBody);
+
+}
+
+// MAKE A BOT THAT SHOOTS IN A CERTAIN DIRECTION, WITH A SHOT EVERY GIVEN NUMBER OF FRAMES
+//DIRECTIONS: 1 = UP, 2 = RIGHT. 3 = DOWN, 4 = LEFT
+void BugginOutDataLoader::makeNoAimBot(Game *game, AnimatedSpriteType *noAimBotType, int spriteType, float initX, float initY, int shotCyc, int shotDir)
+{
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	Physics *physics = game->getGSM()->getPhysics();
+	NoAimBot *bot = new NoAimBot(shotCyc, shotDir);
+	physics->addCollidableObject(bot);
+	PhysicalProperties *pp = bot->getPhysicalProperties();
+	pp->setPosition(initX, initY);
+	pp->setSpriteType(spriteType);
+	bot->setSpriteType(noAimBotType);
+	bot->setCurrentState(IDLE);
+	bot->setAlpha(255);
+	spriteManager->addBot(bot);
+	bot->affixTightAABBBoundingVolume();
+	b2World* bWorld = game->getGSM()->getb2World();
+	b2BodyDef playerBodyDef;
+	playerBodyDef.type = b2_dynamicBody;
+	playerBodyDef.position.Set(initX / 64, (3200 - initY) / 64);
+	playerBodyDef.angle = 0;
+	b2Body* dynamicBody = bWorld->CreateBody(&playerBodyDef);
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(.5, .5);
+
+	b2FixtureDef boxFixtureDef;
+	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.density = 1;
+	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetUserData(bot);
+	bot->setBody(dynamicBody);
+
+}
+
+// MAKE A BOT THAT FOLLOWS THE PLAYER
+void BugginOutDataLoader::makeHomingBot(Game *game, AnimatedSpriteType *homingBotType, int spriteType, float initX, float initY)
+{
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	Physics *physics = game->getGSM()->getPhysics();
+	HomingBot *bot = new HomingBot();
+	physics->addCollidableObject(bot);
+	PhysicalProperties *pp = bot->getPhysicalProperties();
+	pp->setPosition(initX, initY);
+	pp->setSpriteType(spriteType);
+	bot->setSpriteType(homingBotType);
 	bot->setCurrentState(IDLE);
 	bot->setAlpha(255);
 	spriteManager->addBot(bot);
