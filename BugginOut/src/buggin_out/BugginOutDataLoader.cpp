@@ -40,6 +40,14 @@
 #include "psti\PoseurSpriteTypesImporter.h"
 #include "Box2D\Box2D.h"
 
+// FOR LUA SCRIPTING(LEVEL LOADING)
+#include <iostream>
+
+#include "LuaPlusFramework\LuaPlus.h"
+using namespace LuaPlus;
+#include "stdio.h"
+using namespace std;
+
 /*
 	loadGame - This method loads the setup game data into the game and
 	constructs all the needed objects for the game to work.
@@ -350,6 +358,16 @@ void contactListener::EndContact(b2Contact* contact) {
 */
 void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)	
 {
+	LuaState* luaPState = LuaState::Create();
+	if (levelInitFile == L"level1") {
+		int result = luaPState->DoFile("level1.lua");
+	}
+	else if (levelInitFile == L"level2") {
+		int result = luaPState->DoFile("level2.lua");
+	}
+	else if (levelInitFile == L"level3") {
+		int result = luaPState->DoFile("level3.lua");
+	}
 	// LOAD THE LEVEL'S BACKGROUND TILES
 	TMXMapImporter tmxMapImporter;
 	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
@@ -385,8 +403,12 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	b2World* bWorld = game->getGSM()->getb2World();
 	b2BodyDef playerBodyDef;
-	playerBodyDef.type = b2_dynamicBody;
-	playerBodyDef.position.Set(69, 48.4375);
+	playerBodyDef.type = b2_dynamicBody; 
+	LuaObject xObj = luaPState->GetGlobal("playerX");
+	LuaObject yObj = luaPState->GetGlobal("playerY");
+	float playerX = xObj.GetFloat();
+	float playerY = yObj.GetFloat();
+	playerBodyDef.position.Set(playerX, playerY);
 	playerBodyDef.angle = 0;
 	b2Body* dynamicBody = bWorld->CreateBody(&playerBodyDef);
 	b2PolygonShape boxShape;

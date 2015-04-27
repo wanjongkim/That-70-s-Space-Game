@@ -33,6 +33,11 @@
   <ItemGroup>
     <Text Include="src\buggin_out_VS\ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Apps\BugginOut\level1.lua" />
+    <None Include="..\Apps\BugginOut\level2.lua" />
+    <None Include="..\Apps\BugginOut\level3.lua" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3E2D6D4A-BBFA-4423-AA70-CC0F35ECE4F8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
