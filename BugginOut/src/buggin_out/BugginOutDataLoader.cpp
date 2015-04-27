@@ -159,6 +159,179 @@ void BugginOutDataLoader::loadGUI(Game *game, wstring guiInitFile)
 	hardCodedLoadGUIExample(game);
 }
 
+class ContactFilter : b2ContactFilter {
+public:
+	bool ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB);
+};
+
+bool ContactFilter::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB) {
+	const b2Filter& filterA = fixtureA->GetFilterData();
+	const b2Filter& filterB = fixtureB->GetFilterData();
+
+	if (filterA.groupIndex == filterB.groupIndex && filterA.groupIndex != 0)
+	{
+		return filterA.groupIndex > 0;
+	}
+	bool collide = (filterA.maskBits & filterB.categoryBits) != 0 && (filterA.categoryBits & filterB.maskBits) != 0;
+	return collide;
+}
+
+class contactListener : public b2ContactListener {
+	SpriteManager* spriteManager;
+
+	b2World* bWorld;
+
+public:
+	void setWorld(b2World *world) { bWorld = world; };
+	void setSpriteManager(SpriteManager *spriteManage) { spriteManager = spriteManage; };
+	void BeginContact(b2Contact* contact);
+	void EndContact(b2Contact* contact);
+	void setBot(AnimatedSprite *bot);
+};
+
+
+
+void contactListener::BeginContact(b2Contact* contact) {
+	/*
+	void* data = contact->GetFixtureA()->GetBody()->GetUserData();
+	void* data2 = contact->GetFixtureB()->GetBody()->GetUserData();
+	*/
+	//Bot *bot = static_cast<Bot*>(data2);
+	
+	b2Body* body = contact->GetFixtureA()->GetBody();
+	b2Body* body2 = contact->GetFixtureB()->GetBody();
+	/*
+	int a = *((int*)body->GetUserData());
+	int b = *((int*)body2->GetUserData());
+	*/
+	
+	AnimatedSprite* sprite1 = static_cast<AnimatedSprite*>(body->GetUserData());
+	AnimatedSprite* sprite2 = static_cast<AnimatedSprite*>(body2->GetUserData());
+
+
+	//Between player and enemies, and their bullets
+
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 1) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 2) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 3) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 5) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 6) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 7) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 1 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 2 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 3 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 5 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 6 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 7 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 8 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
+		spriteManager->getPlayer()->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+
+	// Between good Bullets and enemies
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 1) {
+		sprite2->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body2);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 2) {
+		sprite2->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body2);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 3) {
+		sprite2->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body2);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 5) {
+		sprite2->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body2);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 1 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
+		sprite1->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 2 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
+		sprite1->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 3 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
+		sprite1->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+	if (sprite1->getPhysicalProperties()->getSpriteType() == 5 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
+		sprite1->setCurrentState(L"DEAD");
+		//bWorld->DestroyBody(body);
+	}
+
+
+	//Bot *bots = static_cast<Bot*>(data);
+
+	//	if (bots != NULL) {
+			//enemy dies
+
+			
+			//bWorld->DestroyBody(contact->GetFixtureA()->GetBody());
+		//}
+		
+}/*
+	 if (contact->GetFixtureA()->GetBody()->GetUserData() == "enemy" && contact->GetFixtureB()->GetBody()->GetUserData() == "goodBullet") {
+	 //enemy dies
+	 spriteManager->
+	 bWorld->DestroyBody(contact->GetFixtureA()->GetBody());
+	 }
+	 if (contact->GetFixtureA()->GetBody()->GetUserData() == "goodBullet" && contact->GetFixtureB()->GetBody()->GetUserData() == "enemy") {
+	 //enemy dies
+	 spriteManager->
+	 bWorld->DestroyBody(contact->GetFixtureA()->GetBody());
+	 }
+	 if (contact->)
+	 */
+
+
+void contactListener::EndContact(b2Contact* contact) {
+
+}
+
 /*
 	loadLevel - This method should load the data the level described by the
 	levelInitFile argument in to the Game's game state manager.
@@ -207,18 +380,21 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(1, 1);
 	
+	//int playerNum = 1;
+
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 1;
 	dynamicBody->CreateFixture(&boxFixtureDef);
 	dynamicBody->SetUserData(player);
+	//dynamicBody->SetUserData(&playerNum);
 	player->setBody(dynamicBody);
 
-	/*AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
+	AnimatedSpriteType *shootingLeftSpriteType = spriteManager->getSpriteType(1);
 	AnimatedSpriteType *shootingRightSpriteType = spriteManager->getSpriteType(2);
 	AnimatedSpriteType *shootingUpSpriteType = spriteManager->getSpriteType(3);
 	AnimatedSpriteType *shootingDownSpriteType = spriteManager->getSpriteType(5);
-	makeShooterBot(game, shootingUpSpriteType, 3, 4288, 1408, 30, 50, 2); */
+	/*makeShooterBot(game, shootingUpSpriteType, 3, 4288, 1408, 30, 50, 2); */
 	/*makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
 	makeShooterBot(game, shootingRightSpriteType, 2, 30, 768, 30, 70, 3);
 	makeShooterBot(game, shootingUpSpriteType, 3, 1152, 800, 30, 50, 2);
@@ -230,16 +406,29 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	makeShooterBot(game, shootingRightSpriteType, 2, 2370, 400, 30, 12, 3);
 	makeShooterBot(game, shootingUpSpriteType, 3, 2304, 1856, 30, 40, 2);
 	makeShooterBot(game, shootingLeftSpriteType, 1, 2880, 1280, 30, 10, 1);*/
+	makeShooterBot(game, shootingUpSpriteType, 3, 4416, 1000, 30, 50, 2);
+	//makeShooterBot(game, shootingRightSpriteType, 2, 4016, 850, 30, 45, 3);
+	//makeShooterBot(game, shootingLeftSpriteType, 1, 4800, 900, 30, 70, 3);
 
-
+	ContactFilter *filter = new ContactFilter();
+	contactListener *contact = new contactListener();
+	b2ContactFilter *filters = new b2ContactFilter();
+	contact->setSpriteManager(spriteManager);
+	contact->setWorld(bWorld);
+	bWorld->SetContactListener(contact);
+	//bWorld->SetContactFilter(filter);
+	
 }
+
 
 // MAKE A BOT THAT MOVES IN A CERTAIN DIRECTION, FOR A CERTAIN NUMBER OF FRAMES, WITH A SHOT EVERY GIVEN NUMBER OF FRAMES
 //DIRECTIONS: 1 = UP, 2 = RIGHT. 3 = DOWN, 4 = LEFT
 void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootingBotType, int spriteType, float initX, float initY, int shotCyc, int moveCyc, int moveDir)
 {
+
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	Physics *physics = game->getGSM()->getPhysics();
+	AnimatedSprite *bots = spriteManager->getBot();
 	ShootingBot *bot = new ShootingBot(shotCyc, moveCyc, moveDir);
 	physics->addCollidableObject(bot);
 	PhysicalProperties *pp = bot->getPhysicalProperties();
@@ -250,6 +439,26 @@ void BugginOutDataLoader::makeShooterBot(Game *game, AnimatedSpriteType *shootin
 	bot->setAlpha(255);
 	spriteManager->addBot(bot);
 	bot->affixTightAABBBoundingVolume();
+	
+
+	b2World* bWorld = game->getGSM()->getb2World();
+	b2BodyDef playerBodyDef;
+	playerBodyDef.type = b2_dynamicBody;
+	playerBodyDef.position.Set(initX / 64, (3200 - initY) / 64);
+	playerBodyDef.angle = 0;
+	b2Body* dynamicBody = bWorld->CreateBody(&playerBodyDef);
+	b2PolygonShape boxShape;
+	boxShape.SetAsBox(.5, .5);
+	
+	b2FixtureDef boxFixtureDef;
+	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.density = 1;
+	//dynamicBody->GetFixtureList()->SetUserData("enemy");
+	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetUserData(bot);
+	bot->setBody(dynamicBody);
+
+	//boxFixtureDef.filter.groupIndex = -1;
 }
 
 void BugginOutDataLoader::makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY)

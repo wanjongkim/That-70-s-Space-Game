@@ -159,6 +159,7 @@ void SpriteManager::update(Game *game)
 
 
 		AnimatedSprite* body = static_cast<AnimatedSprite*>(b->GetUserData());
+		
 		if (body != NULL) {
 			body->getPhysicalProperties()->setPosition((b->GetPosition().x * 64) - (body->getSpriteType()->getTextureWidth() / 2), ((50 - b->GetPosition().y) * 64) - (body->getSpriteType()->getTextureHeight() / 2));
 			body->getPhysicalProperties()->setVelocity(b->GetLinearVelocity().x, b->GetLinearVelocity().y);

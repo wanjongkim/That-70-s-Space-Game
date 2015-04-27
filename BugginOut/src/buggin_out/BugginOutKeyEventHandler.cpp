@@ -144,7 +144,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					b2World* bWorld = game->getGSM()->getb2World();
 					b2BodyDef botBodyDef;
 					botBodyDef.type = b2_dynamicBody;
-					botBodyDef.position.Set((pp->getX() + 46) / 64, (3200 - pp->getY()) / 64);
+					botBodyDef.position.Set((pp->getX() + 46) / 64, (3200 - pp->getY()+7) / 64);
 					botBodyDef.angle = 0;
 					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
 					b2PolygonShape boxShape;
@@ -153,7 +153,9 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					boxFixtureDef.shape = &boxShape;
 					boxFixtureDef.density = 1;
 					dynamicBody->CreateFixture(&boxFixtureDef);
-					dynamicBody->SetUserData(bot);
+					
+					
+					dynamicBody->SetUserData(bot); 
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(0, PLAYER_BULLET_SPEED));
@@ -178,7 +180,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					b2World* bWorld = game->getGSM()->getb2World();
 					b2BodyDef botBodyDef;
 					botBodyDef.type = b2_dynamicBody;
-					botBodyDef.position.Set((pp->getX()) / 64, (3200 - (pp->getY() + 50)) / 64);
+					botBodyDef.position.Set((pp->getX()-20) / 64, (3200 - (pp->getY() + 50)) / 64);
 					botBodyDef.angle = 0;
 					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
 					b2PolygonShape boxShape;
@@ -212,7 +214,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					b2World* bWorld = game->getGSM()->getb2World();
 					b2BodyDef botBodyDef;
 					botBodyDef.type = b2_dynamicBody;
-					botBodyDef.position.Set((pp->getX() + 46) / 64, (3200 - (pp->getY() + 110)) / 64);
+					botBodyDef.position.Set((pp->getX() + 46) / 64, (3200 - (pp->getY() + 110 + 35)) / 64);
 					botBodyDef.angle = 0;
 					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
 					b2PolygonShape boxShape;
@@ -246,7 +248,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					b2World* bWorld = game->getGSM()->getb2World();
 					b2BodyDef botBodyDef;
 					botBodyDef.type = b2_dynamicBody;
-					botBodyDef.position.Set((pp->getX() + 110) / 64, (3200 - (pp->getY() + 50)) / 64);
+					botBodyDef.position.Set((pp->getX() + 110 +35) / 64, (3200 - (pp->getY() + 50)) / 64);
 					botBodyDef.angle = 0;
 					b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
 					b2PolygonShape boxShape;
@@ -255,8 +257,8 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					boxFixtureDef.shape = &boxShape;
 					boxFixtureDef.density = 1;
 					dynamicBody->CreateFixture(&boxFixtureDef);
-					dynamicBody->SetUserData(bot);
 					bot->setBody(dynamicBody);
+					dynamicBody->SetUserData(bot);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(PLAYER_BULLET_SPEED, 0));
 					player->getPhysicalProperties()->setShot(30);
@@ -290,6 +292,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					b2FixtureDef boxFixtureDef;
 					boxFixtureDef.shape = &boxShape;
 					boxFixtureDef.density = 1;
+				
 					dynamicBody->CreateFixture(&boxFixtureDef);
 					dynamicBody->SetUserData(bot);
 					bot->setBody(dynamicBody);
@@ -324,6 +327,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					b2FixtureDef boxFixtureDef;
 					boxFixtureDef.shape = &boxShape;
 					boxFixtureDef.density = 1;
+		
 					dynamicBody->CreateFixture(&boxFixtureDef);
 					dynamicBody->SetUserData(bot);
 					bot->setBody(dynamicBody);
@@ -358,6 +362,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					b2FixtureDef boxFixtureDef;
 					boxFixtureDef.shape = &boxShape;
 					boxFixtureDef.density = 1;
+					
 					dynamicBody->CreateFixture(&boxFixtureDef);
 					dynamicBody->SetUserData(bot);
 					bot->setBody(dynamicBody);

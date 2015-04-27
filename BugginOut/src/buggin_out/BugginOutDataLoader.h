@@ -14,6 +14,8 @@
 #include "sssf\game\Game.h"
 #include "sssf\gsm\sprite\AnimatedSpriteType.h"
 #include "sssf\platforms\DirectX\DirectXTextureManager.h"
+#include "sssf\gsm\ai\bots\BasicBulletBot.h"
+#include "sssf\gsm\ai\bots\ShootingBot.h"
 
 class BugginOutDataLoader : public GameDataLoader
 {
@@ -32,7 +34,7 @@ public:
 		hInstance = initHInstance;
 		nCmdShow = initNCmdShow;
 	}
-
+	
 
 	// THESE SHOULD BE LOADING DATA FROM FILES. THEY
 	// ARE ALL DEFINED IN BugginOutDataLoader.cpp

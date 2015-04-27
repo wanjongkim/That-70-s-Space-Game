@@ -69,6 +69,7 @@ private:
 	Physics			physics;
 
 
+
 public:
 	// INLINED ACCESSOR METHODS
 	GameState		getCurrentGameState()	{ return currentGameState;			}
