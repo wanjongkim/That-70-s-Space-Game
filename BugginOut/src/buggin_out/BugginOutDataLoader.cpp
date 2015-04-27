@@ -457,7 +457,13 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *shootingUpSpriteType = spriteManager->getSpriteType(3);
 	AnimatedSpriteType *shootingDownSpriteType = spriteManager->getSpriteType(5);
 	LuaObject shootObj = luaPState->GetGlobal("shooterSize");
-	float shoot = shootObj.GetInteger();
+	int shoot = shootObj.GetInteger();
+	LuaObject noAimObj = luaPState->GetGlobal("noAimSize");
+	int noAim = noAimObj.GetInteger();
+	LuaObject homingObj = luaPState->GetGlobal("homingSize");
+	int homing = homingObj.GetInteger();
+
+	//SHOOTING BOTS
 	for (int i = 1; i <= shoot; i++){
 		char integer_string[4];
 		sprintf_s(integer_string, "%d", i);
@@ -484,22 +490,50 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 		AnimatedSpriteType* shootSpriteType = spriteManager->getSpriteType(sprType);
 		makeShooterBot(game, shootSpriteType, sprType, xPos, yPos, 30, moveDur, moveDir);
 	}
-	//makeHomingBot(game, shootingUpSpriteType, 3, 4416, 1000);
-	/*makeShooterBot(game, shootingUpSpriteType, 3, 4288, 1408, 30, 50, 2); */
-	/*makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 30, 768, 30, 70, 3);
-	makeShooterBot(game, shootingUpSpriteType, 3, 1152, 800, 30, 50, 2);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 3136, 128, 30, 50, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 30, 1300, 30, 45, 3);
-	makeShooterBot(game, shootingDownSpriteType, 5, 896, 1218, 30, 70, 2);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 2176, 1400, 30, 70, 1);
-    makeShooterBot(game, shootingLeftSpriteType, 1, 2304, 448, 30, 10, 3);
-	makeShooterBot(game, shootingRightSpriteType, 2, 2370, 400, 30, 12, 3);
-	makeShooterBot(game, shootingUpSpriteType, 3, 2304, 1856, 30, 40, 2);
-	makeShooterBot(game, shootingLeftSpriteType, 1, 2880, 1280, 30, 10, 1);*/
-	//makeShooterBot(game, shootingUpSpriteType, 3, 4416, 1000, 30, 50, 2);
-	//makeShooterBot(game, shootingRightSpriteType, 2, 4016, 850, 30, 45, 3);
-	//makeShooterBot(game, shootingLeftSpriteType, 1, 4800, 900, 30, 70, 3);
+
+	//NO AIM BOTS
+	for (int i = 1; i <= noAim; i++){
+		char integer_string[4];
+		sprintf_s(integer_string, "%d", i);
+		char other_string[10] = "nsprite";
+		strcat_s(other_string, integer_string);
+		LuaObject spriteObj = luaPState->GetGlobal(other_string);
+		char nother_string[10] = "nxPos";
+		strcat_s(nother_string, integer_string);
+		LuaObject xObj = luaPState->GetGlobal(nother_string);
+		char mother_string[10] = "nyPos";
+		strcat_s(mother_string, integer_string);
+		LuaObject yObj = luaPState->GetGlobal(mother_string);
+		char kother_string[10] = "ndir";
+		strcat_s(kother_string, integer_string);
+		LuaObject dirObj = luaPState->GetGlobal(kother_string);
+		int sprType = spriteObj.GetInteger();
+		int xPos = xObj.GetInteger();
+		int yPos = yObj.GetInteger();
+		int shotDir = dirObj.GetInteger();
+		AnimatedSpriteType* noAimSpriteType = spriteManager->getSpriteType(sprType);
+		makeNoAimBot(game, noAimSpriteType, sprType, xPos, yPos, 30, shotDir);
+	}
+
+	//HOMING BOTS
+	for (int i = 1; i <= homing; i++){
+		char integer_string[4];
+		sprintf_s(integer_string, "%d", i);
+		char other_string[10] = "hsprite";
+		strcat_s(other_string, integer_string);
+		LuaObject spriteObj = luaPState->GetGlobal(other_string);
+		char nother_string[10] = "hxPos";
+		strcat_s(nother_string, integer_string);
+		LuaObject xObj = luaPState->GetGlobal(nother_string);
+		char mother_string[10] = "hyPos";
+		strcat_s(mother_string, integer_string);
+		LuaObject yObj = luaPState->GetGlobal(mother_string);
+		int sprType = spriteObj.GetInteger();
+		int xPos = xObj.GetInteger();
+		int yPos = yObj.GetInteger();
+		AnimatedSpriteType* shootSpriteType = spriteManager->getSpriteType(sprType);
+		makeHomingBot(game, shootSpriteType, sprType, xPos, yPos);
+	}
 
 	ContactFilter *filter = new ContactFilter();
 	contactListener *contact = new contactListener();

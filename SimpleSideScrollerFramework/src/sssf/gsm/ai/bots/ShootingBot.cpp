@@ -69,16 +69,16 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 	if (this->getPhysicalProperties()->getX() > x){
 		if (this->getPhysicalProperties()->getY() > y){
 			float angle = 90 + ((180 / PI) * atan((this->getPhysicalProperties()->getX() - x) / (this->getPhysicalProperties()->getY() - y)));
-			bulletProps->setVelocity(20 * cos(angle * (PI / 180)), -20 * sin(angle * (PI / 180)));
-			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
+			bulletProps->setVelocity(10 * cos(angle * (PI / 180)), -10 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(10 * cos(angle * (PI / 180)), 10 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
 
 		}
 		else{
 			float angle = 180 + (90 - ((180 / PI) * atan((this->getPhysicalProperties()->getX() - x) / (y - this->getPhysicalProperties()->getY()))));
-			bulletProps->setVelocity(20 * cos(angle * (PI / 180)), -20 * sin(angle * (PI / 180)));
-			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
+			bulletProps->setVelocity(10 * cos(angle * (PI / 180)), -10 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(10 * cos(angle * (PI / 180)), 10 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
 		}
@@ -86,15 +86,15 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 	else{
 		if (this->getPhysicalProperties()->getY() > y){
 			float angle = 90 - ((180 / PI) * atan((x - this->getPhysicalProperties()->getX()) / (this->getPhysicalProperties()->getY() - y)));
-			bulletProps->setVelocity(20 * cos(angle * (PI / 180)), -20 * sin(angle * (PI / 180)));
-			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
+			bulletProps->setVelocity(10 * cos(angle * (PI / 180)), -10 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(10 * cos(angle * (PI / 180)), 10 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
 		}
 		else{
 			float angle = 270 + ((180 / PI) * atan((x - this->getPhysicalProperties()->getX()) / (y - this->getPhysicalProperties()->getY())));
-			bulletProps->setVelocity(20 * cos(angle * (PI / 180)), -20 * sin(angle * (PI / 180)));
-			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
+			bulletProps->setVelocity(10 * cos(angle * (PI / 180)), -10 * sin(angle * (PI / 180)));
+			dynamicBody->SetLinearVelocity(b2Vec2(10 * cos(angle * (PI / 180)), 10* sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
 		}

@@ -1,12 +1,41 @@
+--[[initial player location]] 
 playerX = 69
 playerY = 48.4375
-shooterSize = 3
 
+
+
+
+--[[amount of each bot type]] 
+shooterSize = 3
+noAimSize = 0
+homingSize = 0
+
+
+
+
+--[[1 block per NoAimBot]] 
+nsprite1 = 3
+nxPos1 = 4288
+nyPos1 = 1408
+ndir1 = 1
+
+
+
+
+--[[1 block per HomingBot]] 
+hsprite1 = 3
+hxPos1 = 4928
+hyPos1 = 1408
+
+
+
+
+--[[1 block per ShootingBot]] 
 sprite1 = 3
-xPos1 = 4416
-yPos1 = 1000
+xPos1 = 6090
+yPos1 = 1408
 dir1 = 2
-dur1 = 50
+dur1 = 40
 
 sprite2 = 3
 xPos2 = 4288
