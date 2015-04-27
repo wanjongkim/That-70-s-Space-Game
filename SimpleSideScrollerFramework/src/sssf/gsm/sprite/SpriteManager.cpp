@@ -182,6 +182,9 @@ void SpriteManager::update(Game *game)
 			player.getPhysicalProperties()->setVelocity(0, 0);
 			player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
 		}
+		else if (player.getPhysicalProperties()->getDeathCount() > 2){
+			player.getBody()->SetLinearVelocity(b2Vec2(game->getGUI()->getViewport()->getVx(), game->getGUI()->getViewport()->getVy()));
+		}
 		if (player.getPhysicalProperties()->getDeathCount() == 100){
 			player.setCurrentlyCollidable(false);
 			//player.getPhysicalProperties()->setPosition(100, 100);
