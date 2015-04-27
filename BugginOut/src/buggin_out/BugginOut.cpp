@@ -76,6 +76,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	audioManager->loadAudio(W_WAVE_BANK, W_STREAMING_WAVE_BANK, W_SOUND_BANK);
 	audioManager->loadCue(CUE_ZAP);
 	audioManager->loadCue(CUE_TITLE_MUSIC);
+	audioManager->loadCue(CUE_LEVEL_1_MUSIC);
+	audioManager->loadCue(CUE_LEVEL_2_MUSIC);
+	audioManager->loadCue(CUE_LEVEL_3_MUSIC);
 	audioManager->loadCue(CUE_SONG_1);
 	audioManager->loadCue(CUE_SONG_2);
 	audioManager->loadCue(CUE_PLAYER_FIRE);

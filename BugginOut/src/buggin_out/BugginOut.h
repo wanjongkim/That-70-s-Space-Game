@@ -71,6 +71,9 @@ static const string		CUE_PLAYER_EXPLOSION = "playerExplosion";
 static const string		CUE_BULLET_EXPLOSION = "bulletExplosion";
 static const string		CUE_ENEMY_FIRE = "enemyFire";
 static const string		CUE_TITLE_MUSIC = "title";
+static const string		CUE_LEVEL_1_MUSIC = "level1";
+static const string		CUE_LEVEL_2_MUSIC = "level2";
+static const string		CUE_LEVEL_3_MUSIC = "level3";
 
 // FOR OUR SPRITE
 static const wstring	SPRITE_TYPES_DIR = L"data/sprite_types/";
