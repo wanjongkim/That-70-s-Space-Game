@@ -39,6 +39,7 @@ x and y components of a vector with a magnitude that equals this bot's projectil
 */
 
 void ShootingBot::shootAtPoint(float x, float y, Game *game){
+
 	static const wstring IDLE = (L"IDLE");
 	AnimatedSpriteType *enemyBulletType = game->getGSM()->getSpriteManager()->getSpriteType(8);
 	AnimatedSprite *enemyBullet = new AnimatedSprite();
@@ -50,21 +51,6 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 	bulletProps->setSpriteType(8);
 	bot->setSpriteType(enemyBulletType);
 	bot->setAlpha(255);
-	b2World* bWorld = game->getGSM()->getb2World();
-	b2BodyDef botBodyDef;
-	botBodyDef.type = b2_dynamicBody;
-	botBodyDef.position.Set((this->getPhysicalProperties()->getX()) / 64, (3200 - this->getPhysicalProperties()->getY() - 30) / 64);
-	botBodyDef.angle = 0;
-	b2Body* dynamicBody = bWorld->CreateBody(&botBodyDef);
-	b2PolygonShape boxShape;
-	boxShape.SetAsBox(.125, .125);
-	b2FixtureDef boxFixtureDef;
-	boxFixtureDef.shape = &boxShape;
-	boxFixtureDef.density = 1;
-	dynamicBody->CreateFixture(&boxFixtureDef);
-	dynamicBody->SetUserData(bot);
-	bot->setBody(dynamicBody);
-	dynamicBody->SetLinearDamping(0);
 	bot->setCurrentState(IDLE);
 	if (this->getPhysicalProperties()->getX() > x){
 		if (this->getPhysicalProperties()->getY() > y){
@@ -134,39 +120,22 @@ void ShootingBot::think(Game *game)
 	switch (moveDirection){
 	case 1:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(0.0f, -12.0f);
-		this->getBody()->SetLinearVelocity(b2Vec2(0, -12));
 		}
-		   else {
-			   this->getPhysicalProperties()->setVelocity(0.0f, 12.0f);
-			   this->getBody()->SetLinearVelocity(b2Vec2(0, 12));
-		   }
 		   break;
 	case 2:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
-		this->getBody()->SetLinearVelocity(b2Vec2(12, 0));
 	}
-		   else {
-			   this->getPhysicalProperties()->setVelocity(-12.0f, 0.0f);
-			   this->getBody()->SetLinearVelocity(b2Vec2(-12, 0));
-		   }
+		   else this->getPhysicalProperties()->setVelocity(-12.0f, 0.0f);
 		   break;
 	case 3:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(0.0f, 12.0f);
-		this->getBody()->SetLinearVelocity(b2Vec2(0, 12));
 	}
-		   else {
-			   this->getPhysicalProperties()->setVelocity(0.0f, -12.0f);
-			   this->getBody()->SetLinearVelocity(b2Vec2(0, -12));
-		   }
+		   else this->getPhysicalProperties()->setVelocity(0.0f, -12.0f);
 		   break;
 	case 4:if (actualMoveDirection){
 		this->getPhysicalProperties()->setVelocity(-12.0f, 0.0f);
-		this->getBody()->SetLinearVelocity(b2Vec2(-12, 0));
 	}
-		   else {
-			   this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
-			   this->getBody()->SetLinearVelocity(b2Vec2(12, 0));
-		   }
+		   else this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
 		   break;
 	}
 
