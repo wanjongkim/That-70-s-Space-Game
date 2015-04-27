@@ -25,6 +25,7 @@ private:
 	int nCmdShow;
 
 public:
+
 	BugginOutDataLoader()	{}
 	~BugginOutDataLoader()	{}
 

@@ -188,11 +188,12 @@ bool ContactFilter::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB) {
 
 class contactListener : public b2ContactListener {
 	SpriteManager* spriteManager;
-
 	b2World* bWorld;
+	Game *aGame;
 
 public:
 	void setWorld(b2World *world) { bWorld = world; };
+	void setGame(Game *initGame) { aGame = initGame; };
 	void setSpriteManager(SpriteManager *spriteManage) { spriteManager = spriteManage; };
 	void BeginContact(b2Contact* contact);
 	void EndContact(b2Contact* contact);
@@ -223,60 +224,74 @@ void contactListener::BeginContact(b2Contact* contact) {
 
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 1) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 2) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 3) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 5) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 6) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 7) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 0 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			sprite2->setCurrentState(L"DEAD");
 			//bWorld->DestroyBody(body);
 		}
 
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 1 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 2 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 3 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 5 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 6 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 7 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 8 && sprite2->getPhysicalProperties()->getSpriteType() == 0) {
 			spriteManager->getPlayer()->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_PLAYER_EXPLOSION);
 			sprite1->setCurrentState(L"DEAD");
 			//bWorld->DestroyBody(body);
 		}
@@ -285,41 +300,49 @@ void contactListener::BeginContact(b2Contact* contact) {
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 1) {
 			sprite2->setCurrentState(L"DEAD");
 			sprite1->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body2);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 2) {
 			sprite2->setCurrentState(L"DEAD");
 			sprite1->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body2);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 3) {
 			sprite2->setCurrentState(L"DEAD");
 			sprite1->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body2);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 5) {
 			sprite2->setCurrentState(L"DEAD");
 			sprite1->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body2);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 1 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
 			sprite1->setCurrentState(L"DEAD");
 			sprite2->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 2 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
 			sprite1->setCurrentState(L"DEAD");
 			sprite2->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 3 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
 			sprite1->setCurrentState(L"DEAD");
 			sprite2->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 5 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
 			sprite1->setCurrentState(L"DEAD");
 			sprite2->setCurrentState(L"DEAD");
+			aGame->getGSM()->getAudioManager()->playSound(CUE_BULLET_EXPLOSION);
 			//bWorld->DestroyBody(body);
 		}
 
@@ -346,6 +369,14 @@ void contactListener::BeginContact(b2Contact* contact) {
 			contact->SetEnabled(false);
 		}
 		if (sprite1->getPhysicalProperties()->getSpriteType() == 5 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
+			contact->SetEnabled(false);
+		}
+
+		// Between bullets
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 8 && sprite2->getPhysicalProperties()->getSpriteType() == 4) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 4 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
 			contact->SetEnabled(false);
 		}
 	}
@@ -546,6 +577,7 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 
 	ContactFilter *filter = new ContactFilter();
 	contactListener *contact = new contactListener();
+	contact->setGame(game);
 	b2ContactFilter *filters = new b2ContactFilter();
 	contact->setSpriteManager(spriteManager);
 	contact->setWorld(bWorld);

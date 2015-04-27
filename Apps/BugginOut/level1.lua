@@ -10,18 +10,18 @@ playerY = 48.4375
 
 
 --[[amount of each bot type]] 
-shooterSize = 3
-noAimSize = 0
+shooterSize = 6
+noAimSize = 1
 homingSize = 0
 
 
 
 
 --[[1 block per NoAimBot specify spriteType, position, shot direction]] 
-nsprite1 = 3
-nxPos1 = 4288
-nyPos1 = 1408
-ndir1 = 1
+nsprite1 = 1
+nxPos1 = 9472
+nyPos1 = 832
+ndir1 = 4
 
 
 
@@ -54,20 +54,20 @@ dir3 = 2
 dur3 = 50
 
 sprite4 = 3
-xPos4 = 4416
-yPos4 = 1000
+xPos4 = 7552
+yPos4 = 1408
 dir4 = 2
-dur4 = 50
+dur4 = 15
 
 sprite5 = 3
-xPos5 = 4416
-yPos5 = 1000
+xPos5 = 8320
+yPos5 = 1408
 dir5 = 2
-dur5 = 50
+dur5 = 25
 
 sprite6 = 3
-xPos6 = 4416
-yPos6 = 1000
+xPos6 = 8832
+yPos6 = 1408
 dir6 = 2
 dur6 = 50
 

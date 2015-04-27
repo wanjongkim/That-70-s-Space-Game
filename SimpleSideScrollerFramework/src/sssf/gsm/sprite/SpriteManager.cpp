@@ -197,11 +197,12 @@ void SpriteManager::update(Game *game)
 	while (botIterator != bots.end())
 	{
 		Bot *bot = (*botIterator);
-		if (bot->getFrameCount() >= 100){
+		if (bot->getFrameCount() >= 150){
 			bot->setCurrentState(DEAD);
 		}
 		if (bot->getCurrentState() == DEAD){
 			bot->getPhysicalProperties()->setVelocity(0, 0);
+			bot->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 			if (bot->getPhysicalProperties()->getSpriteType() == 4 || bot->getPhysicalProperties()->getSpriteType() == 8){
 				bot->getPhysicalProperties()->setCollidable(false);
 				game->getGSM()->getb2World()->DestroyBody(bot->getBody());
