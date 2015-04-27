@@ -1,3 +1,7 @@
+--[[to load the map info]]
+levelDir = "data/levels/SideScrollerDesert/"
+levelName = "SideScrollerDesertLevel.tmx"
+
 --[[initial player location]] 
 playerX = 69
 playerY = 48.4375
@@ -13,7 +17,7 @@ homingSize = 0
 
 
 
---[[1 block per NoAimBot]] 
+--[[1 block per NoAimBot specify spriteType, position, shot direction]] 
 nsprite1 = 3
 nxPos1 = 4288
 nyPos1 = 1408
@@ -22,7 +26,7 @@ ndir1 = 1
 
 
 
---[[1 block per HomingBot]] 
+--[[1 block per HomingBot specify spriteType, position]] 
 hsprite1 = 3
 hxPos1 = 4928
 hyPos1 = 1408
@@ -30,7 +34,7 @@ hyPos1 = 1408
 
 
 
---[[1 block per ShootingBot]] 
+--[[1 block per ShootingBot specify spriteType, position, move direction and duration]] 
 sprite1 = 3
 xPos1 = 6090
 yPos1 = 1408

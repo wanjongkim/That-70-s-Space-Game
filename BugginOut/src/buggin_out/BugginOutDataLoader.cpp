@@ -395,8 +395,17 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 		int result = luaPState->DoFile("level3.lua");
 	}
 	// LOAD THE LEVEL'S BACKGROUND TILES
+
 	TMXMapImporter tmxMapImporter;
-	tmxMapImporter.loadWorld(game, W_LEVEL_1_DIR, W_LEVEL_1_NAME);
+	LuaObject mapDirObj = luaPState->GetGlobal("levelDir");
+	LuaObject mapNameObj = luaPState->GetGlobal("levelName");
+	string levelDir = mapDirObj.GetString();
+	std::wstring wLevel;
+	wLevel.assign(levelDir.begin(), levelDir.end());
+	string levelName = mapNameObj.GetString();
+	std::wstring wName;
+	wName.assign(levelName.begin(), levelName.end());
+	tmxMapImporter.loadWorld(game, wLevel, wName);
 
 	// LOAD THE LEVEL'S SPRITE IMAGES
 	PoseurSpriteTypesImporter psti;
