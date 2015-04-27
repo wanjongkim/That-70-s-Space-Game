@@ -174,9 +174,10 @@ void SpriteManager::update(Game *game)
 	player.updateSprite();
 	if (player.getCurrentState() == DEAD){
 		player.getPhysicalProperties()->setVelocity(0, 0);
+		player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
 		if (player.getPhysicalProperties()->getDeathCount() == 50){
 			player.setCurrentlyCollidable(false);
-			player.getPhysicalProperties()->setPosition(100, 100);
+			//player.getPhysicalProperties()->setPosition(100, 100);
 			player.setCurrentState(IDLE);
 			player.getPhysicalProperties()->setDeathCount(0);
 		}
@@ -198,11 +199,13 @@ void SpriteManager::update(Game *game)
 			bot->getPhysicalProperties()->setVelocity(0, 0);
 			if (bot->getPhysicalProperties()->getSpriteType() == 4 || bot->getPhysicalProperties()->getSpriteType() == 8){
 				bot->getPhysicalProperties()->setCollidable(false);
+				game->getGSM()->getb2World()->DestroyBody(bot->getBody());
 				botIterator = bots.erase(botIterator);
 				//delete(bot);
 			}
 			else if (bot->getPhysicalProperties()->getDeathCount() == 50){
 				bot->getPhysicalProperties()->setCollidable(false);
+				game->getGSM()->getb2World()->DestroyBody(bot->getBody());
 				botIterator = bots.erase(botIterator);
 				//delete(bot);
 			}
