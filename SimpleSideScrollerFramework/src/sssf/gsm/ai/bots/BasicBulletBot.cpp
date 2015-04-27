@@ -38,6 +38,5 @@ frame, depending on the value of cyclesRemainingBeforeThinking.
 */
 void BasicBulletBot::think(Game *game)
 {
-
 	frameCounter++;
 }

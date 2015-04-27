@@ -108,10 +108,14 @@ decision-making.
 void ShootingBot::think(Game *game)
 {
 	static const wstring DEAD = (L"DEAD");
+	Viewport *view = game->getGUI()->getViewport();
 	if (actualCyclesBeforeShoot == 0){
 		AnimatedSprite *player = game->getGSM()->getSpriteManager()->getPlayer();
 		float playerDist = sqrt((this->getPhysicalProperties()->getX() - player->getPhysicalProperties()->getX())*(this->getPhysicalProperties()->getX() - player->getPhysicalProperties()->getX()) + (this->getPhysicalProperties()->getY() - player->getPhysicalProperties()->getY()) * (this->getPhysicalProperties()->getY() - player->getPhysicalProperties()->getY()));
-		if (playerDist < 1300 && player->getCurrentState() != DEAD){
+		if (playerDist < 1300 && player->getCurrentState() != DEAD && view->getViewportX() < this->getPhysicalProperties()->getX() && 
+		this->getPhysicalProperties()->getX() < (view->getViewportX() + view->getViewportWidth()) && view->getViewportY() < this->getPhysicalProperties()->getY() &&
+		this->getPhysicalProperties()->getY() < (view->getViewportY() + view->getViewportHeight())){
+
 			this->shootAtPoint(player->getPhysicalProperties()->getX()+60, player->getPhysicalProperties()->getY()+60, game);
 			game->getGSM()->getAudioManager()->playSound("enemyFire");
 			actualCyclesBeforeShoot = cyclesBeforeShoot;

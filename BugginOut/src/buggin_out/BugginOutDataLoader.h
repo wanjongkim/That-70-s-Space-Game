@@ -48,6 +48,8 @@ public:
 	void initViewport(GameGUI *gui, map<wstring,wstring> *properties);
 	void makeRandomJumpingBot(Game *game, AnimatedSpriteType *randomJumpingBotType, float initX, float initY);
 	void makeShooterBot(Game *game, AnimatedSpriteType *shootingBotType, int spriteType, float initX, float initY, int shotCyc, int moveCyc, int moveDir);
+	void makeNoAimBot(Game *game, AnimatedSpriteType *noAimBotType, int spriteType, float initX, float initY, int shotCyc, int shotDir);
+	void makeHomingBot(Game *game, AnimatedSpriteType *homingBotType, int spriteType, float initX, float initY);
 
 	// AND SOME HELPER METHODS FOR LOADING THE GUI
 	void initCursor(GameGUI *gui, DirectXTextureManager *guiTextureManager);
