@@ -322,6 +322,32 @@ void contactListener::BeginContact(b2Contact* contact) {
 			sprite2->setCurrentState(L"DEAD");
 			//bWorld->DestroyBody(body);
 		}
+
+		// Between bad Bullets and enemies
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 8 && sprite2->getPhysicalProperties()->getSpriteType() == 1) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 8 && sprite2->getPhysicalProperties()->getSpriteType() == 2) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 8 && sprite2->getPhysicalProperties()->getSpriteType() == 3) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 8 && sprite2->getPhysicalProperties()->getSpriteType() == 5) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 1 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 2 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 3 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
+			contact->SetEnabled(false);
+		}
+		if (sprite1->getPhysicalProperties()->getSpriteType() == 5 && sprite2->getPhysicalProperties()->getSpriteType() == 8) {
+			contact->SetEnabled(false);
+		}
 	}
 
 	//Bot *bots = static_cast<Bot*>(data);
@@ -411,15 +437,17 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	playerBodyDef.position.Set(playerX, playerY);
 	playerBodyDef.angle = 0;
 	b2Body* dynamicBody = bWorld->CreateBody(&playerBodyDef);
-	b2PolygonShape boxShape;
-	boxShape.SetAsBox(1, 1);
-	
+	//b2PolygonShape boxShape;
+	b2CircleShape circleShape;
+	//boxShape.SetAsBox(1, 1);
+	circleShape.m_radius = .3125;
 	//int playerNum = 1;
 
-	b2FixtureDef boxFixtureDef;
-	boxFixtureDef.shape = &boxShape;
-	boxFixtureDef.density = 1;
-	dynamicBody->CreateFixture(&boxFixtureDef);
+	//b2FixtureDef boxFixtureDef;
+	b2FixtureDef circleFixtureDef;
+	circleFixtureDef.shape = &circleShape;
+	circleFixtureDef.density = 1;
+	dynamicBody->CreateFixture(&circleFixtureDef);
 	dynamicBody->SetUserData(player);
 	//dynamicBody->SetUserData(&playerNum);
 	player->setBody(dynamicBody);
@@ -428,7 +456,35 @@ void BugginOutDataLoader::loadWorld(Game *game, wstring levelInitFile)
 	AnimatedSpriteType *shootingRightSpriteType = spriteManager->getSpriteType(2);
 	AnimatedSpriteType *shootingUpSpriteType = spriteManager->getSpriteType(3);
 	AnimatedSpriteType *shootingDownSpriteType = spriteManager->getSpriteType(5);
-	makeHomingBot(game, shootingUpSpriteType, 3, 4416, 1000);
+	LuaObject shootObj = luaPState->GetGlobal("shooterSize");
+	float shoot = shootObj.GetInteger();
+	for (int i = 1; i <= shoot; i++){
+		char integer_string[4];
+		sprintf_s(integer_string, "%d", i);
+		char other_string[10] = "sprite"; 
+		strcat_s(other_string, integer_string);
+		LuaObject spriteObj = luaPState->GetGlobal(other_string);
+		char nother_string[10] = "xPos";
+		strcat_s(nother_string, integer_string);
+		LuaObject xObj = luaPState->GetGlobal(nother_string);
+		char mother_string[10] = "yPos";
+		strcat_s(mother_string, integer_string);
+		LuaObject yObj = luaPState->GetGlobal(mother_string);
+		char lother_string[10] = "dir";
+		strcat_s(lother_string, integer_string);
+		LuaObject dirObj = luaPState->GetGlobal(lother_string);
+		char kother_string[10] = "dur";
+		strcat_s(kother_string, integer_string);
+		LuaObject durObj = luaPState->GetGlobal(kother_string);
+		int sprType = spriteObj.GetInteger();
+		int xPos = xObj.GetInteger();
+		int yPos = yObj.GetInteger();
+		int moveDir = dirObj.GetInteger();
+		int moveDur = durObj.GetInteger();
+		AnimatedSpriteType* shootSpriteType = spriteManager->getSpriteType(sprType);
+		makeShooterBot(game, shootSpriteType, sprType, xPos, yPos, 30, moveDur, moveDir);
+	}
+	//makeHomingBot(game, shootingUpSpriteType, 3, 4416, 1000);
 	/*makeShooterBot(game, shootingUpSpriteType, 3, 4288, 1408, 30, 50, 2); */
 	/*makeShooterBot(game, shootingLeftSpriteType, 1, 1536, 128, 30, 70, 3);
 	makeShooterBot(game, shootingRightSpriteType, 2, 30, 768, 30, 70, 3);
