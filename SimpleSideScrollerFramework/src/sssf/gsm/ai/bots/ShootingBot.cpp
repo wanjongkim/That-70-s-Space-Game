@@ -39,7 +39,6 @@ x and y components of a vector with a magnitude that equals this bot's projectil
 */
 
 void ShootingBot::shootAtPoint(float x, float y, Game *game){
-
 	static const wstring IDLE = (L"IDLE");
 	AnimatedSpriteType *enemyBulletType = game->getGSM()->getSpriteManager()->getSpriteType(8);
 	AnimatedSprite *enemyBullet = new AnimatedSprite();
@@ -51,8 +50,6 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 	bulletProps->setSpriteType(8);
 	bot->setSpriteType(enemyBulletType);
 	bot->setAlpha(255);
-	
-
 	b2World* bWorld = game->getGSM()->getb2World();
 	b2BodyDef botBodyDef;
 	botBodyDef.type = b2_dynamicBody;
@@ -65,9 +62,9 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 1;
 	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetUserData(bot);
 	bot->setBody(dynamicBody);
 	dynamicBody->SetLinearDamping(0);
-
 	bot->setCurrentState(IDLE);
 	if (this->getPhysicalProperties()->getX() > x){
 		if (this->getPhysicalProperties()->getY() > y){
@@ -76,6 +73,7 @@ void ShootingBot::shootAtPoint(float x, float y, Game *game){
 			dynamicBody->SetLinearVelocity(b2Vec2(20 * cos(angle * (PI / 180)), 20 * sin(angle * (PI / 180))));
 			game->getGSM()->getSpriteManager()->addBot(bot);
 			bot->affixTightAABBBoundingVolume();
+
 		}
 		else{
 			float angle = 180 + (90 - ((180 / PI) * atan((this->getPhysicalProperties()->getX() - x) / (y - this->getPhysicalProperties()->getY()))));
@@ -110,10 +108,14 @@ decision-making.
 void ShootingBot::think(Game *game)
 {
 	static const wstring DEAD = (L"DEAD");
+	Viewport *view = game->getGUI()->getViewport();
 	if (actualCyclesBeforeShoot == 0){
 		AnimatedSprite *player = game->getGSM()->getSpriteManager()->getPlayer();
 		float playerDist = sqrt((this->getPhysicalProperties()->getX() - player->getPhysicalProperties()->getX())*(this->getPhysicalProperties()->getX() - player->getPhysicalProperties()->getX()) + (this->getPhysicalProperties()->getY() - player->getPhysicalProperties()->getY()) * (this->getPhysicalProperties()->getY() - player->getPhysicalProperties()->getY()));
-		if (playerDist < 1300 && player->getCurrentState() != DEAD){
+		if (playerDist < 1300 && player->getCurrentState() != DEAD && view->getViewportX() < this->getPhysicalProperties()->getX() && 
+		this->getPhysicalProperties()->getX() < (view->getViewportX() + view->getViewportWidth()) && view->getViewportY() < this->getPhysicalProperties()->getY() &&
+		this->getPhysicalProperties()->getY() < (view->getViewportY() + view->getViewportHeight())){
+
 			this->shootAtPoint(player->getPhysicalProperties()->getX()+60, player->getPhysicalProperties()->getY()+60, game);
 			game->getGSM()->getAudioManager()->playSound("enemyFire");
 			actualCyclesBeforeShoot = cyclesBeforeShoot;
@@ -137,7 +139,6 @@ void ShootingBot::think(Game *game)
 		   else {
 			   this->getPhysicalProperties()->setVelocity(0.0f, 12.0f);
 			   this->getBody()->SetLinearVelocity(b2Vec2(0, 12));
-			   
 		   }
 		   break;
 	case 2:if (actualMoveDirection){
@@ -147,7 +148,6 @@ void ShootingBot::think(Game *game)
 		   else {
 			   this->getPhysicalProperties()->setVelocity(-12.0f, 0.0f);
 			   this->getBody()->SetLinearVelocity(b2Vec2(-12, 0));
-			   
 		   }
 		   break;
 	case 3:if (actualMoveDirection){
@@ -157,7 +157,6 @@ void ShootingBot::think(Game *game)
 		   else {
 			   this->getPhysicalProperties()->setVelocity(0.0f, -12.0f);
 			   this->getBody()->SetLinearVelocity(b2Vec2(0, -12));
-			   
 		   }
 		   break;
 	case 4:if (actualMoveDirection){
@@ -165,9 +164,8 @@ void ShootingBot::think(Game *game)
 		this->getBody()->SetLinearVelocity(b2Vec2(-12, 0));
 	}
 		   else {
-				this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
-				 this->getBody()->SetLinearVelocity(b2Vec2(12, 0));
-			   
+			   this->getPhysicalProperties()->setVelocity(12.0f, 0.0f);
+			   this->getBody()->SetLinearVelocity(b2Vec2(12, 0));
 		   }
 		   break;
 	}

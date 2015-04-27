@@ -159,7 +159,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(0, PLAYER_BULLET_SPEED));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(LEFT_KEY) && shotTime == 0)
@@ -193,7 +193,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(-PLAYER_BULLET_SPEED, 0));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(DOWN_KEY) && shotTime == 0)
@@ -227,7 +227,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(0, -PLAYER_BULLET_SPEED));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(RIGHT_KEY) && shotTime == 0)
@@ -261,7 +261,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					dynamicBody->SetUserData(bot);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(PLAYER_BULLET_SPEED, 0));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 			}
@@ -298,7 +298,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(LEFT_KEY) && shotTime == 0)
@@ -333,7 +333,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(-PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(DOWN_KEY) && shotTime == 0)
@@ -368,7 +368,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(-PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 				if (input->isKeyDownForFirstTime(RIGHT_KEY) && shotTime == 0)
@@ -402,7 +402,7 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 					bot->setBody(dynamicBody);
 					dynamicBody->SetLinearDamping(0);
 					dynamicBody->SetLinearVelocity(b2Vec2(PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED));
-					player->getPhysicalProperties()->setShot(30);
+					player->getPhysicalProperties()->setShot(15);
 					am->playSound(CUE_PLAYER_FIRE);
 				}
 			}
