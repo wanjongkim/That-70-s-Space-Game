@@ -178,9 +178,11 @@ void SpriteManager::update(Game *game)
 	// UPDATE THE PLAYER SPRITE
 	player.updateSprite();
 	if (player.getCurrentState() == DEAD){
-		player.getPhysicalProperties()->setVelocity(0, 0);
-		player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
-		if (player.getPhysicalProperties()->getDeathCount() == 50){
+		if (player.getPhysicalProperties()->getDeathCount() == 2){
+			player.getPhysicalProperties()->setVelocity(0, 0);
+			player.getBody()->SetLinearVelocity(b2Vec2(0, 0));
+		}
+		if (player.getPhysicalProperties()->getDeathCount() == 100){
 			player.setCurrentlyCollidable(false);
 			//player.getPhysicalProperties()->setPosition(100, 100);
 			player.setCurrentState(IDLE);
@@ -197,7 +199,7 @@ void SpriteManager::update(Game *game)
 	while (botIterator != bots.end())
 	{
 		Bot *bot = (*botIterator);
-		if (bot->getFrameCount() >= 150){
+		if (bot->getFrameCount() >= 100){
 			bot->setCurrentState(DEAD);
 		}
 		if (bot->getCurrentState() == DEAD){
@@ -209,7 +211,7 @@ void SpriteManager::update(Game *game)
 				botIterator = bots.erase(botIterator);
 				//delete(bot);
 			}
-			else if (bot->getPhysicalProperties()->getDeathCount() == 50){
+			else if (bot->getPhysicalProperties()->getDeathCount() == 40){
 				bot->getPhysicalProperties()->setCollidable(false);
 				game->getGSM()->getb2World()->DestroyBody(bot->getBody());
 				botIterator = bots.erase(botIterator);

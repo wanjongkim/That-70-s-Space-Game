@@ -59,6 +59,13 @@ void BugginOutKeyEventHandler::handleKeyEvents(Game *game)
 		// YOU MIGHT WANT TO UNCOMMENT THIS FOR SOME TESTING,
 		// BUT IN THIS ASSIGNMENT, THE USER MOVES VIA MOUSE BUTTON PRESSES
 		if (player->getCurrentState() != DEAD){
+			if (input->isKeyDown(CONTROL_KEY)){
+				if (input->isKeyDownForFirstTime(V_KEY)){
+					bool in = player->getPhysicalProperties()->getInvincible();
+					player->getPhysicalProperties()->setInvincible(!in);
+				}
+			}
+			
 			if (input->isKeyDownForFirstTime(R_KEY))
 			{
 				player->getPhysicalProperties()->swapFireDir();

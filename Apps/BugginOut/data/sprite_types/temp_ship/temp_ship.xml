@@ -165,7 +165,7 @@
                 <pose image_id="44" duration="2"/>
                 <pose image_id="45" duration="2"/>
                 <pose image_id="46" duration="2"/>
-                <pose image_id="47" duration="60"/>
+                <pose image_id="47" duration="150"/>
             </animation_sequence>
         </animation_state>
     </animations_list>  

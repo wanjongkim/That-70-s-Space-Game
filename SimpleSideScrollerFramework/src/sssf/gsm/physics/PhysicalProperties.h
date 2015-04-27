@@ -20,9 +20,10 @@ protected:
 	int spriteType;
 	int deathCount;
 	int shotTimer;
+	bool isInvincible;
 
 public:
-	PhysicalProperties()	{ accelerationX = 0; accelerationY = 0; fireStraight = true; dead = false; deathCount = 0; shotTimer = 0; }
+	PhysicalProperties()	{ accelerationX = 0; accelerationY = 0; fireStraight = true; dead = false; deathCount = 0; shotTimer = 0; isInvincible = false; }
 	~PhysicalProperties()	{}
 
 	// INLINED METHODS
@@ -39,6 +40,8 @@ public:
 	float getAccelerationY()				{ return accelerationY;			}
 	bool getFireDir()						{ return fireStraight;			}
 	bool getDead()							{ return dead;					}
+	bool getInvincible()					{ return isInvincible;			}
+	void setInvincible(bool initInv)		{ isInvincible = initInv;		}	
 	int  getShot()							{ return shotTimer;				}
 	void setShot(int initShot)				{ shotTimer = initShot;			}
 	int  getSpriteType()					{ return spriteType;			}

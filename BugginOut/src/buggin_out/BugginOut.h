@@ -122,11 +122,13 @@ const unsigned int I_KEY = (unsigned int)'I';
 const unsigned int J_KEY = (unsigned int)'J';
 const unsigned int K_KEY = (unsigned int)'K';
 const unsigned int L_KEY = (unsigned int)'L';
+const unsigned int V_KEY = (unsigned int)'V';
 const unsigned int UP_KEY = VK_UP;
 const unsigned int DOWN_KEY = VK_DOWN;
 const unsigned int LEFT_KEY = VK_LEFT;
 const unsigned int RIGHT_KEY = VK_RIGHT;
 const unsigned int SPACE_KEY = VK_SPACE;
+const unsigned int CONTROL_KEY = VK_CONTROL;
 
 // THIS IS JUST FOR SHOWING HOW THE CURSOR CAN BE CHANGED
 const unsigned int C_KEY = (unsigned int)'C';
